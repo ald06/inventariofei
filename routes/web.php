@@ -21,3 +21,7 @@ Route::get('/', function () {
 Route::get('/registrarequipo', function () {
     return view('equiposComputo.create');
 });
+
+Route::get('/layout', function () {
+    return view('layouts.app');
+});
