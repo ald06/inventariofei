@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//rutas de prueba
+Route::get('/registrarequipo', function () {
+    return view('equiposComputo.create');
+});
