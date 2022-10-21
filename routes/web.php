@@ -22,6 +22,11 @@ Route::get('/registrarequipo', function () {
     return view('equiposComputo.create');
 });
 
+Route::get('/registrarsoftware', function () {
+    return view('software.create');
+});
+
 Route::get('/layout', function () {
     return view('layouts.app');
 });
+
