@@ -30,3 +30,6 @@ Route::get('/layout', function () {
     return view('layouts.app');
 });
 
+Route::get('/verInformacion', function () {
+    return view('verInformacion');
+});
