@@ -15,7 +15,10 @@ class CreateBiensTable extends Migration
     {
         Schema::create('biens', function (Blueprint $table) {
             $table->id();
+            $table->string('noserie');
+            $table->string('noinventario');
             $table->timestamps();
+            $table->softdeletes();
         });
     }
 
