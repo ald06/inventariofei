@@ -36,11 +36,6 @@
             }
         }
 </script>
-<style>
-    input.busqueda {
-        padding: 15px 2px px 30px;
-    }
-</style>
 <body>
 
         <div class="w3-sidebar w3-bar-block" style="display:none" id="mySidebar">
