@@ -14,7 +14,7 @@
 </head>
 <script>
     function w3_open() {
-        document.getElementById("mySidebar").style.width = "100%";
+        document.getElementById("mySidebar").style.width = "30%";
         document.getElementById("mySidebar").style.display = "block";
     }
 
@@ -36,6 +36,11 @@
             }
         }
 </script>
+<style>
+    div.container{
+        padding: 10px 5px 5px 10px
+    }
+</style>
 <body>
 
         <div class="w3-sidebar w3-bar-block" style="display:none" id="mySidebar">
