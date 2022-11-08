@@ -15,7 +15,10 @@ class CreateAdquisicionsTable extends Migration
     {
         Schema::create('adquisicions', function (Blueprint $table) {
             $table->id();
+            $table->string('tipoAdquisicion');
+            $table->string('lugarAdquisicion');
             $table->timestamps();
+            $table->softdeletes();
         });
     }
 
