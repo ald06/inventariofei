@@ -15,7 +15,10 @@ class CreateMovimientosTable extends Migration
     {
         Schema::create('movimientos', function (Blueprint $table) {
             $table->id();
+            $table->string('tipoMovimiento');
+            $table->string('observaciones');
             $table->timestamps();
+            $table->SoftDeletes();
         });
     }
 

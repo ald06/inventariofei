@@ -15,6 +15,9 @@ class CreateResponsablesTable extends Migration
     {
         Schema::create('responsables', function (Blueprint $table) {
             $table->id();
+            $table->string('matricula');
+            $table->string('nombre');
+            $table->string('rol');
             $table->timestamps();
         });
     }

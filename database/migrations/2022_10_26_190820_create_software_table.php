@@ -14,8 +14,17 @@ class CreateSoftwareTable extends Migration
     public function up()
     {
         Schema::create('software', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+          $table->id();
+          $table->string('nombre');
+          $table->string('version');
+          $table->string('descripcion');
+          $table->string('tipoSoftware');
+          $table->string('licencia');
+          $table->string('disponibilidad');
+          $table->string('equiposPermitidos');
+          $table->string('equiposOcupados');
+          $table->timestamps();
+          $table->softdeletes();
         });
     }
 
