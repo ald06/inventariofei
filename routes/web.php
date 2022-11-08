@@ -30,9 +30,42 @@ Route::get('/registrarsoftware', function () {
     return view('software.create');
 });
 
+Route::get('/registrarmonitor', function () {
+    return view('monitor.create');
+});
+
+Route::get('/registrarproyector', function () {
+    return view('proyector.create');
+});
+
+Route::get('/registrarswitch', function () {
+    return view('switch.create');
+});
+
+Route::get('/verequipo', function () {
+    return view('equiposComputo.show');
+});
+
+Route::get('/versoftware', function () {
+    return view('software.show');
+});
+
+Route::get('/vermonitor', function () {
+    return view('monitor.show');
+});
+
+Route::get('/verproyector', function () {
+    return view('proyector.show');
+});
+
+Route::get('/verswitch', function () {
+    return view('switch.show');
+});
+
 Route::get('/layout', function () {
     return view('layouts.app');
 });
+
 
 Route::get('/verInformacion', function () {
     return view('verInformacion');
