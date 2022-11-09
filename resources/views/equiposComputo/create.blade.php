@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro 2</title>
+    <title>Registro PC</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -13,19 +13,19 @@
 </head>
 
 <body>
-    <div class="container">
-        <form>
+    <div class="container ">
+        <form method="post">
             <!-- contenedor de informacion -->
             <div class="row py-3 px-5">
                 <div class="col-sm-6">
                     <div class="col-sm-12">
-                        <label for="nsinv" class="form-label">NS Inventario: </label>
+                        <label for="nsinv" class="form-label">No Inventario: </label>
                     </div>
                     <div class="col-sm-6">
                         <input type="text" id="nsinv" class="form-control">
                     </div>
                     <div class="col-sm-12">
-                        <label for="nsuv" class="form-label">NS UV: </label>
+                        <label for="nsuv" class="form-label">No UV: </label>
                     </div>
                     <div class="col-sm-6">
                         <input type="text" id="nsuv" class="form-control">
@@ -36,22 +36,13 @@
                         <label for="tipo">Tipo: </label>
                     </div>
                     <div class="col-sm-8">
-                        <select id="tipo" class="form-select">
-                            <option value="ei">Equipo Informatico</option>
-                            <option value="soft">Software</option>
-                        </select>
+                        <input class="form-control" type="text" value="Equipo Informatico" id="tipo" disabled readonly>
                     </div>
                     <div class="col-sm-12">
                         <label for="dispo">Dispositivo: </label>
                     </div>
                     <div class="col-sm-8">
-                        <select id="dispo" class="form-select">
-                            <option value="com">Computadora</option>
-                            <option value="mon">Monitor</option>
-                            <option value="imp">Impresora</option>
-                            <option value="pro">Proyector</option>
-                            <option value="swt">Switch</option>
-                        </select>
+                        <input class="form-control" type="text" value="Computadora" id="dispo" disabled readonly>
                     </div>
                 </div>
             </div>
@@ -72,42 +63,12 @@
                         <input type="text" id="modelo" class="form-control">
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-8">
                     <div class="col-sm-12">
-                        <label for="USB">USB: </label>
+                        <label for="puertos" class="form-label">Conectividad/Puertos:</label>
                     </div>
-                    <div class="col-sm-6">
-                        <input type="number" id="USB" min="0" max="10" class="form-control">
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="teclado" class="form-check-input">
-                        <label for="teclado">Teclado</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="mouse" class="form-check-input">
-                        <label for="mouse">Mouse</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="ethernet" class="form-check-input">
-                        <label for="ethernet">Ethernet</label>
-                    </div>
-                </div>
-                <div class="col-sm-4 py-3">
-                    <div class="form-check">
-                        <input type="checkbox" id="monitor" class="form-check-input">
-                        <label for="monitor">Monitor</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="microfono" class="form-check-input">
-                        <label for="microfono">Microfono</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="hdmi" class="form-check-input">
-                        <label for="hdmi">HDMI</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="vga" class="form-check-input">
-                        <label for="vga">VGA</label>
+                    <div class="col-sm-12">
+                        <textarea id="puertos" cols="30" rows="10" class="form-control"  ></textarea>
                     </div>
                 </div>
             </div>
@@ -239,7 +200,7 @@
                             <select id="estado" class="form-control">
                                 <option value="disp">Disponible</option>
                                 <option value="mant">Mantenimiento</option>
-                                <option value="prest">Prestada</option>
+                                <option value="prest">Prestado</option>
                             </select>
                         </div>
                         <div class="col-sm-12">
@@ -270,7 +231,7 @@
                     <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
                 </div>
                 <div class="col-sm-6 py-2 px-5">
-                    <button type="button" class="btn btn-success btn-lg">Guardar</button>
+                    <button type="button" class="btn btn-success btn-lg" id="btnguardar">Guardar</button>
                 </div>
             </div>
         </form>
