@@ -19,6 +19,8 @@ class CreateResponsablesTable extends Migration
             $table->string('nombre');
             $table->string('rol');
             $table->timestamps();
+            $table->softdeletes();
+
         });
     }
 

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Hardware;
+use App\Bien;
 use Illuminate\Http\Request;
+use Redirect,Response,DB,Config;
+use Datatables;
 
 class HardwareController extends Controller
 {
@@ -12,9 +15,26 @@ class HardwareController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function getData()
+    {
+     $hardwares = Hardware::with('bien')->get();
+     return datatables()->of($hardwares)->addColumn('actions', function($hardware) {
+       return '
+         <div class="btn-group dropleft" data-toggle="tooltip" data-placement="top" title="Acciones">
+             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="fas fa-bars fa-lg"></i>
+             </button>
+             <div class="dropdown-menu">
+               <a href="'.route('hardware.edit', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
+             <div class="dropdown-divider my-1"></div>';
+     })
+   ->rawColumns(['actions'])
+   ->make(true);
+    }
     public function index()
     {
-        //
+        return view('hw.index');
     }
 
     /**
@@ -24,7 +44,8 @@ class HardwareController extends Controller
      */
     public function create()
     {
-        //
+      $hardware = new Hardware;
+      return view('hw.create', compact('hardware'));
     }
 
     /**
@@ -35,8 +56,33 @@ class HardwareController extends Controller
      */
     public function store(Request $request)
     {
-        //
+  
+      try {
+        $bien =  new Bien;
+        $bien->noserie = $request->noserie;
+        $bien->noinventario = $request->noinventario;
+        $bien->responsable_id = $request->responsable;
+        $bien->ubicacion_id = $request->ubicacion;
+        $bien->estatus_id = $request->estatus;
+        $bien->save();
+        $ultimobien = Bien::latest('id')->first();
+        $hardware = new Hardware;
+        $hardware->marca = $request->marca;
+        $hardware->modelo = $request->modelo;
+        $hardware->tipo = $request->tipo;
+        $hardware->caracteristicas = $request->caracteristicas;
+        $hardware->observaciones = $request->observaciones;
+        $hardware->bien_id = $ultimobien->id;
+        $hardware->save();
+      } catch (\Exception $e) {
+          $errors = $e;
+      return redirect()->back()->with('errors', $errors);
+  }
+
+
+    return redirect('hardware')->with('message', 'Registro Exitoso');
     }
+
 
     /**
      * Display the specified resource.

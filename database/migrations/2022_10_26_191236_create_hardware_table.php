@@ -15,12 +15,13 @@ class CreateHardwareTable extends Migration
     {
         Schema::create('hardware', function (Blueprint $table) {
             $table->id();
-            $table->string('marco');
+            $table->string('marca');
             $table->string('modelo');
             $table->string('tipo');
             $table->string('caracteristicas');
             $table->string('observaciones');
-            $table->string('version');
+            $table->unsignedBigInteger('bien_id');
+            $table->foreign('bien_id')->references('id')->on('biens');
             $table->timestamps();
             $table->softdeletes();
         });

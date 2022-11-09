@@ -21,6 +21,10 @@ Route::get('/', function () {
 Route::get('/bien/getdata', 'BienController@getData')->name('bien.getData');
 Route::resource('/bien', 'BienController');
 
+//rutas de bienes
+Route::get('/hardware/getdata', 'HardwareController@getData')->name('hardware.getData');
+Route::resource('/hardware', 'HardwareController');
+
 //rutas de prueba
 Route::get('/registrarequipo', function () {
     return view('equiposComputo.create');

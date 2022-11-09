@@ -23,6 +23,8 @@ class CreateSoftwareTable extends Migration
           $table->string('disponibilidad');
           $table->string('equiposPermitidos');
           $table->string('equiposOcupados');
+          $table->unsignedBigInteger('bien_id');
+          $table->foreign('bien_id')->references('id')->on('biens');
           $table->timestamps();
           $table->softdeletes();
         });

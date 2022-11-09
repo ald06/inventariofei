@@ -57,12 +57,20 @@ class BienController extends Controller
     public function store(Request $request)
     {
       try {
-    $bien = Bien::create($request->all());
-  } catch (\Exception $e) {
-    $errors = $e;
-    return redirect()->back()->with('errors', $errors);
+        $bien =  new Bien;
+        $bien->noserie = $request->noserie;
+        $bien->noinventario = $request->noinventario;
+        $bien->responsable_id = $request->responsable;
+        $bien->ubicacion_id = $request->ubicacion;
+        $bien->estatus_id = $request->estatus;
+        $bien->save();
+      } catch (\Exception $e) {
+          $errors = $e;
+      return redirect()->back()->with('errors', $errors);
   }
-return redirect('bien')->with('message', 'Registro Exitoso');
+
+
+    return redirect('bien')->with('message', 'Registro Exitoso');
     }
 
     /**

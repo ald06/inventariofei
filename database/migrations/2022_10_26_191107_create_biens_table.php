@@ -17,6 +17,12 @@ class CreateBiensTable extends Migration
             $table->id();
             $table->string('noserie');
             $table->string('noinventario');
+            $table->unsignedBigInteger('responsable_id');
+            $table->foreign('responsable_id')->references('id')->on('responsables');
+            $table->unsignedBigInteger('ubicacion_id');
+            $table->foreign('ubicacion_id')->references('id')->on('ubicacions');
+            $table->unsignedBigInteger('estatus_id');
+            $table->foreign('estatus_id')->references('id')->on('estatuses');
             $table->timestamps();
             $table->softdeletes();
         });

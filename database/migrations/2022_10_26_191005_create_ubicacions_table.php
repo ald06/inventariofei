@@ -18,6 +18,7 @@ class CreateUbicacionsTable extends Migration
             $table->string('edificio');
             $table->string('aula');
             $table->timestamps();
+            $table->softdeletes();
         });
     }
 
