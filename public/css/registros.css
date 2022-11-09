@@ -1,0 +1,13 @@
+h1{
+    color: white;
+    background-color: #003466;
+}
+
+textarea {
+    resize: none;
+    height: 110px;
+  }
+
+div {
+    background-color: rgb(200, 200, 254);
+}
