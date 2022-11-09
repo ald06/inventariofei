@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Hardware;
 use App\Bien;
+use App\Responsable;
+use App\Ubicacion;
 use Illuminate\Http\Request;
 use Redirect,Response,DB,Config;
 use Datatables;
@@ -19,6 +21,7 @@ class HardwareController extends Controller
      public function getData()
     {
      $hardwares = Hardware::with('bien')->get();
+     // $hardwares = Hardware::all();
      return datatables()->of($hardwares)->addColumn('actions', function($hardware) {
        return '
          <div class="btn-group dropleft" data-toggle="tooltip" data-placement="top" title="Acciones">
@@ -44,8 +47,10 @@ class HardwareController extends Controller
      */
     public function create()
     {
+      $ubicaciones  = Ubicacion::all();
+      $responsables = Responsable::all();
       $hardware = new Hardware;
-      return view('hw.create', compact('hardware'));
+      return view('hw.create', compact('hardware','ubicaciones','responsables'));
     }
 
     /**
@@ -56,7 +61,7 @@ class HardwareController extends Controller
      */
     public function store(Request $request)
     {
-  
+
       try {
         $bien =  new Bien;
         $bien->noserie = $request->noserie;
