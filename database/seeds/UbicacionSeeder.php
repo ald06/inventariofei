@@ -11,6 +11,11 @@ class UbicacionSeeder extends Seeder
      */
     public function run()
     {
+        $ubicacion= new Ubicacion;
+        $ubicacion->edificio  = "FEI";
+        $ubicacion->aula  = "CENTRO DE COMPUTO";
+        $ubicacion->save();
+
         for ($i=0; $i < 10; $i++) {
           $ubicacion= new Ubicacion;
           $ubicacion->edificio  = "edificio".$i;
