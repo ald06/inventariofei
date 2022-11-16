@@ -70,7 +70,7 @@
          </div>
         </div>
         <div class="form-group row justify-content-center my-5">
-          <label for="caracteristicas" class="col-sm-2 col-form-label">Descripcion </label>
+          <label for="caracteristicas" class="col-sm-2 col-form-label">Caracteristicas </label>
           <div class="col-sm-10">
             <textarea class="form-control" name = "caracteristicas" id="caracteristicas" value = "{{ old('caracteristicas') }}" rows="3"></textarea required>
           </div>

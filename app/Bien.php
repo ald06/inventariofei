@@ -11,6 +11,6 @@ class Bien extends Model
   protected $fillable = [
     'noserie',
     'noinventario',     
-];
+  ];
 protected $dates = ['deleted_at'];
 }
