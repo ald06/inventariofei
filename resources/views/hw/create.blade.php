@@ -41,7 +41,7 @@
             <input type="text" id="modelo" name="modelo" value="{{ old('modelo') }}" class="form-control text-center text-uppercase" placeholder="" required>
           </div>
           <div class="form-group col-md-4">
-            <label for="estatus">Estatus</label>
+            <label for="estatus">tipo adquisicion pendiente</label>
             <select class="form-control" name="estatus" id="estatus" required>
               <option value="" @if(old('estatus') == "") selected @endif>Elija un opcion</option>
               <option value="1" @if(old('estatus') == "Tarjeta") selected @endif>Disponible</option>
@@ -49,26 +49,15 @@
             </select>
          </div>
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-4">
-            <label for="responsable">Responsable</label>
-            <select class="form-control" name="responsable" id="responsable">
-            <option value="">elija una opcion</option>
-            @foreach ($responsables as $responsable)
-              <option value="{{$responsable->id}}"> {{$responsable->nombre}}</option>
-            @endforeach
-          </select>
-         </div>
-          <div class="form-group col-md-4">
-            <label for="ubicacion">Ubicacion</label>
-            <select class="form-control" name="ubicacion" id="ubicacion">
-            <option value="">elija una opcion</option>
-            @foreach ($ubicaciones as $ubicacion)
-              <option value="{{$ubicacion->id}}"> {{$ubicacion->aula}}</option>
-            @endforeach
-          </select>
-         </div>
+        <div class="form-group col-md-4">
+          <label for="responsable">Responsable</label>
+          <input type="text" id="responsable" name="responsable" value="{{ $responsable->nombre }}" class="form-control text-center text-uppercase" placeholder="" required readonly>
         </div>
+       <div class="form-group col-md-4">
+         <label for="ubicacion">Ubicacion</label>
+         <input type="text" id="ubicacion" name="ubicacion" value="{{ $ubicacion->edificio}} - {{ $ubicacion->aula}}" class="form-control text-center text-uppercase" placeholder="" required readonly>
+       </div>
+     </div>
         <div class="form-group row justify-content-center my-5">
           <label for="caracteristicas" class="col-sm-2 col-form-label">Caracteristicas </label>
           <div class="col-sm-10">

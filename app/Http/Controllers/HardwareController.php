@@ -47,8 +47,8 @@ class HardwareController extends Controller
      */
     public function create()
     {
-      $ubicacion   = Ubicacion::where('aula','=','centro de computo')->get();
-      $responsable = Responsable::where('rol','=','jefe de centro de computo')->get();
+      $ubicacion   = Ubicacion::where('aula','=','centro de computo')->firstOrFail();;
+      $responsable = Responsable::where('rol', '=', 'jefe de centro de computo')->firstOrFail();
       // dd($ubicaciones);
       $hardware = new Hardware;
       return view('hw.create', compact('hardware','ubicacion','responsable'));
