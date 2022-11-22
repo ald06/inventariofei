@@ -7,6 +7,8 @@
     <div class="container">
     {!! Form::model($responsable, ['action' => 'ResponsableController@store']) !!}
         <div class="col">
+        <label for="matricula">Matricula</label>
+            <input type="text" id="matricula"  name="matricula" value="{{ old('nombre') }}" class="form-control" require>
             <label for="nombre">Nombre del Responsable</label>
             <input type="text" id="nombre"  name="nombre" value="{{ old('nombre') }}" class="form-control" require>
             <label for="rol">Rol</label>
