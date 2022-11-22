@@ -3,16 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Responsable extends Model
 {
   protected $primaryKey = 'id';
   protected $fillable = [
-    'matricula',
+    //'matricula',
     'nombre',
     'rol',
   ];
-  protected $dates = ['deleted_at'];
+ // protected $dates = ['deleted_at'];
 
 }

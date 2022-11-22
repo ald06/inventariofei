@@ -32,6 +32,9 @@ Route::resource('/software', 'SoftwareController');
 Route::get('/tiposhardware/getdata', 'TiposHardwareController@getData')->name('tiposHardware.getData');
 Route::resource('/tiposhardware', 'TiposHardwareController');
 
+Route::get('/responsable/getdata', 'ResponsableController@getData')->name('responsable.getData');
+Route::resource('/responsable', 'ResponsableController');
+
 
 //rutas de prueba
 Route::get('/registrarequipo', function () {
