@@ -32,8 +32,13 @@ Route::resource('/software', 'SoftwareController');
 Route::get('/tiposhardware/getdata', 'TiposHardwareController@getData')->name('tiposHardware.getData');
 Route::resource('/tiposhardware', 'TiposHardwareController');
 
+<<<<<<< HEAD
 Route::get('/responsable/getdata', 'ResponsableController@getData')->name('responsable.getData');
 Route::resource('/responsable', 'ResponsableController');
+=======
+Route::get('/ubicacion/getdata', 'UbicacionController@getData')->name('ubicacion.getData');
+Route::resource('/ubicacion', 'UbicacionController');
+>>>>>>> 24b97d9 (catalogo de ubicaciones)
 
 
 //rutas de prueba
