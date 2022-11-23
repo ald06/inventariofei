@@ -87,6 +87,22 @@
 								</li>
 							</ul>
 				</li>
+				<li class="nav-item has-treeview ">
+					<a href="#" class="nav-link">
+					<i class="fa-solid fas fa-user-tie"></i>
+						<p>
+							Personal
+							<i class="right fa fa-angle-left "></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview submenu">
+								<li class="nav-item submenuitem">
+									<a href="{{ url('/responsable') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+										<p class="submenuitem">Responsables</p>
+									</a>
+								</li>
+							</ul>
+				</li>
 
 		</nav>
 		<!-- /.sidebar-menu -->
