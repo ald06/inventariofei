@@ -18,6 +18,7 @@
         <table id="table" name="table" class="table table-hover display responsive no-wrap " width="100%">
           <thead class="thead text-white">
             <tr>
+              <th scope="col">Matricula</th>
               <th scope="col">Responsable</th>
               <th scope="col">Rol</th>
               <th scope="col" data-priority="1" class="title text-white">Acciones</th>

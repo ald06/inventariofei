@@ -15,7 +15,6 @@ class ResponsableController extends Controller
     public function getData()
 {
     $responsable = Responsable::all();
-    // $hardwares = Hardware::all();
     return datatables()->of($responsable)->addColumn('actions', function($responsable) {
       return '
         <div class="btn-group dropleft" data-toggle="tooltip" data-placement="top" title="Acciones">
@@ -23,7 +22,7 @@ class ResponsableController extends Controller
               <i class="fas fa-bars fa-lg"></i>
             </button>
             <div class="dropdown-menu">
-              <a href="'.route('tiposhardware.edit', $responsable->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
+              <a href="'.route('responsable.edit', $responsable->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
             <div class="dropdown-divider my-1"></div>';
     })
   ->rawColumns(['actions'])
@@ -86,9 +85,10 @@ class ResponsableController extends Controller
      * @param  \App\Responsable  $responsable
      * @return \Illuminate\Http\Response
      */
-    public function edit(Responsable $responsable)
+    public function edit($id)
     {
-        //
+        $responsable = Responsable::findOrFail($id);
+      return view('responsable.edit', compact('responsable'));
     }
 
     /**
@@ -98,9 +98,11 @@ class ResponsableController extends Controller
      * @param  \App\Responsable  $responsable
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Responsable $responsable)
+    public function update(Request $request, $id)
     {
-        //
+      $responsable = Responsable::findOrFail($id);
+      $responsable->fill($request->all())->save();
+      return redirect('responsable')->with('message', 'Datos actualizados');
     }
 
     /**
@@ -109,8 +111,11 @@ class ResponsableController extends Controller
      * @param  \App\Responsable  $responsable
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Responsable $responsable)
+    public function destroy(Request $request, $id)
     {
-        //
+      $responsable = Responsable::findOrFail($id);
+      $responsable->delete();
+      return redirect('responsable')->with('message', 'Bien Editado');
+
     }
 }

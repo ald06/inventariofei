@@ -9,7 +9,7 @@ class Responsable extends Model
 {
   protected $primaryKey = 'id';
   protected $fillable = [
-    //'matricula',
+    'matricula',
     'nombre',
     'rol',
   ];
