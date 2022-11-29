@@ -44,8 +44,8 @@
             <label for="estatus">tipo adquisicion pendiente</label>
             <select class="form-control" name="estatus" id="estatus" required>
               <option value="" @if(old('estatus') == "") selected @endif>Elija un opcion</option>
-              <option value="1" @if(old('estatus') == "Tarjeta") selected @endif>Disponible</option>
-              <option value="2" @if(old('estatus') == "Tarjeta") selected @endif>Asignado </option>
+              <option value="1" @if(old('estatus') == "Tarjeta") selected @endif>Donacion</option>
+              <option value="2" @if(old('estatus') == "Tarjeta") selected @endif>Compra</option>
             </select>
          </div>
         </div>

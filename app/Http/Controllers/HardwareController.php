@@ -62,7 +62,6 @@ class HardwareController extends Controller
      */
     public function store(Request $request)
     {
-
       try {
         $bien =  new Bien;
         $bien->noserie = $request->noserie;
