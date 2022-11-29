@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Responsable extends Model
 {
@@ -13,6 +13,6 @@ class Responsable extends Model
     'nombre',
     'rol',
   ];
-  protected $dates = ['deleted_at'];
+ // protected $dates = ['deleted_at'];
 
 }

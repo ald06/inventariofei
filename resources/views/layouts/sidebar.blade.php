@@ -20,16 +20,30 @@
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 				<li class="nav-item has-treeview ">
 					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-folder-minus"></i>
+						<i class="fa-regular fas fa-microchip"></i>						
 						<p>
 							Hardware
 							<i class="right fa fa-angle-left "></i>
 						</p>
 					</a>
+					<ul class="nav nav-treeview submenu">
+							<li class="nav-item submenuitem">
+								<a href="{{ url('/hardware') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+									<p class="submenuitem">Registros</p>
+								</a>
+							</li>
+						</ul>
+					<ul class="nav nav-treeview submenu">
+							<li class="nav-item submenuitem">
+								<a href="{{ url('/tiposhardware') }}" class="nav-link"><i class="fa-solid fas fa-list"></i>
+									<p class="submenuitem">Catalogo</p>
+								</a>
+							</li>
+						</ul>
 				</li>
-					<li class="nav-item has-treeview ">
-						<a href="#" class="nav-link">
-							<i class="nav-icon fas fa-folder-minus"></i>
+				<li class="nav-item has-treeview ">
+					<a href="#" class="nav-link">
+						<i class="fa-solid fas fa-compact-disc"></i>
 							<p>
 								Software
 								<i class="right fa fa-angle-left "></i>
@@ -37,14 +51,14 @@
 						</a>
 						<ul class="nav nav-treeview submenu">
 							<li class="nav-item submenuitem">
-								<a href="{{ url('/primariasdocentes') }}" class="nav-link"><i class="fas fa-building nav-icon submenuitem"></i>
-									<p class="submenuitem">Consulta</p>
+								<a href="{{ url('/hardware') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+									<p class="submenuitem">Registros</p>
 								</a>
 							</li>
 						</ul>
-						<li class="nav-item has-treeview ">
+				<li class="nav-item has-treeview ">
 							<a href="#" class="nav-link">
-								<i class="nav-icon fas fa-folder-minus"></i>
+								<i class="fa-solid fas fa-wrench"></i>
 								<p>
 									Reparacion de equipos
 									<i class="right fa fa-angle-left "></i>
@@ -52,11 +66,43 @@
 							</a>
 							<ul class="nav nav-treeview submenu">
 								<li class="nav-item submenuitem">
-									<a href="{{ url('/primariasdocentes') }}" class="nav-link"><i class="fas fa-building nav-icon submenuitem"></i>
-										<p class="submenuitem">Registro</p>
+									<a href="{{ url('/primariasdocentes') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+										<p class="submenuitem">Registros</p>
 									</a>
 								</li>
 							</ul>
+				<li class="nav-item has-treeview ">
+					<a href="#" class="nav-link">
+					<i class="fa-solid fas fa-compass"></i>
+						<p>
+							Ubicaciones
+							<i class="right fa fa-angle-left "></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview submenu">
+								<li class="nav-item submenuitem">
+									<a href="{{ url('/ubicacion') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+										<p class="submenuitem">Catalogo</p>
+									</a>
+								</li>
+							</ul>
+				</li>
+				<li class="nav-item has-treeview ">
+					<a href="#" class="nav-link">
+					<i class="fa-solid fas fa-user-tie"></i>
+						<p>
+							Personal
+							<i class="right fa fa-angle-left "></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview submenu">
+								<li class="nav-item submenuitem">
+									<a href="{{ url('/responsable') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+										<p class="submenuitem">Responsables</p>
+									</a>
+								</li>
+							</ul>
+				</li>
 
 		</nav>
 		<!-- /.sidebar-menu -->

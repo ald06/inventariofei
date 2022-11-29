@@ -15,7 +15,6 @@ class TiposHardwareController extends Controller
     public function getData()
     {
      $tiposHardware = TiposHardware::all();
-     // $hardwares = Hardware::all();
      return datatables()->of($tiposHardware)->addColumn('actions', function($tiposHardware) {
        return '
          <div class="btn-group dropleft" data-toggle="tooltip" data-placement="top" title="Acciones">
@@ -24,7 +23,8 @@ class TiposHardwareController extends Controller
              </button>
              <div class="dropdown-menu">
                <a href="'.route('tiposhardware.edit', $tiposHardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
-             <div class="dropdown-divider my-1"></div>';
+               <a href="'.route('tiposhardware.destroy', $tiposHardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Eliminar</a>
+               <div class="dropdown-divider my-1"></div>';
      })
    ->rawColumns(['actions'])
    ->make(true);
@@ -54,6 +54,9 @@ class TiposHardwareController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = $this->validate($request,[
+            'nomHardware' => 'required|string|max:50|unique:tipos_hardware'
+        ]);
         try {
             $tiposHardware = new TiposHardware;
             $tiposHardware->nomHardware = $request->nomHardware;
@@ -83,9 +86,10 @@ class TiposHardwareController extends Controller
      * @param  \App\TiposHardware  $tiposHardware
      * @return \Illuminate\Http\Response
      */
-    public function edit(TiposHardware $tiposHardware)
+    public function edit($id)
     {
-        //
+        $tiposHardware = TiposHardware::findOrFail($id);
+      return view('catalogoHardware.edit', compact('tiposHardware'));
     }
 
     /**
@@ -95,9 +99,11 @@ class TiposHardwareController extends Controller
      * @param  \App\TiposHardware  $tiposHardware
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TiposHardware $tiposHardware)
+    public function update(Request $request, $id)
     {
-        //
+      $tiposHardware = TiposHardware::findOrFail($id);
+      $tiposHardware->fill($request->all())->save();
+      return redirect('tiposhardware')->with('message', 'Equipo Editado');
     }
 
     /**
@@ -106,8 +112,10 @@ class TiposHardwareController extends Controller
      * @param  \App\TiposHardware  $tiposHardware
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TiposHardware $tiposHardware)
+    public function destroy(Request $request, $id)
     {
-        //
+      $tiposHardware = TiposHardware::findOrFail($id);
+      $tiposHardware->delete();
+      return redirect('tiposhardware')->with('message', 'Bien Editado');
     }
 }

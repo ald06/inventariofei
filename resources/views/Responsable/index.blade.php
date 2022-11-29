@@ -8,8 +8,8 @@
   <div class="container-fluid">
     <div class="card text-center">
       <div class="card-header">
-        <h3 class="float-left">Catálogo</h3>
-        <a href="{{url('tiposhardware/create')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right">
+        <h3 class="float-left">Responsable</h3>
+        <a href="{{url('responsable/create')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right">
           <i class="fas fa-plus"></i>
         </a>
       </div>
@@ -18,7 +18,9 @@
         <table id="table" name="table" class="table table-hover display responsive no-wrap " width="100%">
           <thead class="thead text-white">
             <tr>
-              <th scope="col">nomHardware</th>
+              <th scope="col">Matricula</th>
+              <th scope="col">Responsable</th>
+              <th scope="col">Rol</th>
               <th scope="col" data-priority="1" class="title text-white">Acciones</th>
             </tr>
           </thead>
@@ -43,7 +45,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-excel fa-3x" data-toggle="tooltip" data-placement="top" title="Excel"></i>',
           extend: 'excelHtml5',
           fieldSeparator: '\t',
-          title : 'Equipos de Hardware',
+          title : 'Materias',
             exportOptions: {
               columns: [ 0, ':visible' ]
             }
@@ -52,7 +54,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-csv fa-3x" data-toggle="tooltip" data-placement="top" title="CSV"></i>',
           extend: 'csvHtml5',
           fieldSeparator: '\t',
-          title : 'Equipos de Hardware',
+          title : 'Materias',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -61,7 +63,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-pdf fa-3x" data-toggle="tooltip" data-placement="top" title="PDF"></i>',
           extend: 'pdfHtml5',
           fieldSeparator: '\t',
-          title : 'Equipos de Hardware',
+          title : 'Materias',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -70,7 +72,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-print fa-3x" data-toggle="tooltip" data-placement="top" title="Imprimir"></i>',
           extend: 'print',
           fieldSeparator: '\t',
-          title : 'Equipos de Hardware',
+          title : 'Materias',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -82,9 +84,11 @@ $(document).ready( function () {
         //   title : 'Columnas',
         // },
     ],
-    ajax: "{{ url('tiposhardware/getdata') }}",
+    ajax: "{{ url('responsable/getdata') }}",
     columns: [
-      { data: 'nomHardware' },
+      { data: 'matricula' },
+      { data: 'nombre' },
+      { data: 'rol' },
       { data: 'actions', className: "center", defaultContent: '<button class="edit btn btn-light disabled"> NO </button>' }
     ],
     language: {
