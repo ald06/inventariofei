@@ -17,6 +17,7 @@ class CreateTiposHardwareTable extends Migration
             $table->id();
             $table->string('nomHardware');
             $table->timestamps();
+            $table->softdeletes();
         });
     }
 
