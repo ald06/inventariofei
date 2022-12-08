@@ -21,7 +21,7 @@ class HardwareController extends Controller
      public function getData()
     {
      $hardwares = Hardware::with('bien')->get();
-     // $hardwares = Hardware::all();
+    //  $hardwares = Hardware::all();
      return datatables()->of($hardwares)->addColumn('actions', function($hardware) {
        return '
          <div class="btn-group dropleft" data-toggle="tooltip" data-placement="top" title="Acciones">
@@ -47,11 +47,10 @@ class HardwareController extends Controller
      */
     public function create()
     {
-      $ubicacion   = Ubicacion::where('aula','=','centro de computo')->firstOrFail();;
-      $responsable = Responsable::where('rol', '=', 'jefe de centro de computo')->firstOrFail();
+
       // dd($ubicaciones);
       $hardware = new Hardware;
-      return view('hw.create', compact('hardware','ubicacion','responsable'));
+      return view('hw.create', compact('hardware'));
     }
 
     /**
@@ -63,11 +62,13 @@ class HardwareController extends Controller
     public function store(Request $request)
     {
       try {
+        $ubicacion   = Ubicacion::where('aula','=','centro de computo')->firstOrFail();;
+        $responsable = Responsable::where('rol', '=', 'jefe de centro de computo')->firstOrFail();
         $bien =  new Bien;
         $bien->noserie = $request->noserie;
         $bien->noinventario = $request->noinventario;
-        $bien->responsable_id = $request->responsable;
-        $bien->ubicacion_id = $request->ubicacion;
+        $bien->responsable_id = $responsable->id;
+        $bien->ubicacion_id = $ubicacion->id;
         $bien->estatus_id = $request->estatus;
         $bien->save();
         $ultimobien = Bien::latest('id')->first();
