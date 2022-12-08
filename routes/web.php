@@ -38,6 +38,10 @@ Route::resource('/responsable', 'ResponsableController');
 Route::get('/ubicacion/getdata', 'UbicacionController@getData')->name('ubicacion.getData');
 Route::resource('/ubicacion', 'UbicacionController');
 
+Route::get('/tiposadquisicion/getdata', 'TiposAdquisicionController@getData')->name('tiposAdquisicion.getData');
+Route::resource('/tiposadquisicion', 'TiposAdquisicionController');
+
+
 /*<<<<<<< HEAD
 
 =======

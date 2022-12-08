@@ -102,6 +102,13 @@
 										</a>
 									</li>
 								</ul>
+								<ul class="nav nav-treeview submenu">
+						<li class="nav-item submenuitem">
+							<a href="{{ url('/tiposadquisicion') }}" class="nav-link"><i class="fa-thin fa-money-check-dollar"></i>
+								<p class="submenuitem">Adquisiciones</p>
+							</a>
+						</li>
+					</ul>
 				</li>
 		</nav>
 		<!-- /.sidebar-menu -->

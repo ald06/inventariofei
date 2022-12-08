@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Responsable extends Migration
+class CreateTiposAdquisicionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class Responsable extends Migration
      */
     public function up()
     {
-        Schema::create('responsable',function (Blueprint $table){
+        Schema::create('tipos_adquisicions', function (Blueprint $table) {
             $table->id();
-            $table->matricula('matricula');
-            $table->string('nombre');
-            $table->string('rol');
             $table->timestamps();
         });
-
-        
     }
 
     /**
@@ -31,6 +26,6 @@ class Responsable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('responsable');
+        Schema::dropIfExists('tipos_adquisicions');
     }
 }
