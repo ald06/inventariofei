@@ -33,13 +33,6 @@
 								</a>
 							</li>
 						</ul>
-					<ul class="nav nav-treeview submenu">
-							<li class="nav-item submenuitem">
-								<a href="{{ url('/tiposhardware') }}" class="nav-link"><i class="fa-solid fas fa-list"></i>
-									<p class="submenuitem">Catalogo</p>
-								</a>
-							</li>
-						</ul>
 				</li>
 				<li class="nav-item has-treeview ">
 					<a href="#" class="nav-link">
@@ -66,27 +59,11 @@
 							</a>
 							<ul class="nav nav-treeview submenu">
 								<li class="nav-item submenuitem">
-									<a href="{{ url('/primariasdocentes') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+									<a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
 										<p class="submenuitem">Registros</p>
 									</a>
 								</li>
 							</ul>
-				<li class="nav-item has-treeview ">
-					<a href="#" class="nav-link">
-					<i class="fa-solid fas fa-compass"></i>
-						<p>
-							Ubicaciones
-							<i class="right fa fa-angle-left "></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview submenu">
-								<li class="nav-item submenuitem">
-									<a href="{{ url('/ubicacion') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
-										<p class="submenuitem">Catalogo</p>
-									</a>
-								</li>
-							</ul>
-				</li>
 				<li class="nav-item has-treeview ">
 					<a href="#" class="nav-link">
 					<i class="fa-solid fas fa-user-tie"></i>
@@ -103,7 +80,29 @@
 								</li>
 							</ul>
 				</li>
-
+				<li class="nav-item has-treeview ">
+						<a href="#" class="nav-link">
+							<i class="fa-solid fas fa-window-restore"></i>
+							<p>
+								Catalogos
+								<i class="right fa fa-angle-left "></i>
+							</p>
+						</a>
+					<ul class="nav nav-treeview submenu">
+						<li class="nav-item submenuitem">
+							<a href="{{ url('/tiposhardware') }}" class="nav-link"><i class="fa-solid fas fa-list"></i>
+								<p class="submenuitem">Hardware</p>
+							</a>
+						</li>
+					</ul>
+						<ul class="nav nav-treeview submenu">
+									<li class="nav-item submenuitem">
+										<a href="{{ url('/ubicacion') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+											<p class="submenuitem">Ubicaciones</p>
+										</a>
+									</li>
+								</ul>
+				</li>
 		</nav>
 		<!-- /.sidebar-menu -->
 	</div>

@@ -115,7 +115,7 @@ class TiposHardwareController extends Controller
     public function destroy(Request $request, $id)
     {
       $tiposHardware = TiposHardware::findOrFail($id);
-      $tiposHardware->delete();
+      $tiposHardware->softDelete();
       return redirect('tiposhardware')->with('message', 'Bien Editado');
     }
 }

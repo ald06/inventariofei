@@ -61,6 +61,10 @@ class HardwareController extends Controller
      */
     public function store(Request $request)
     {
+      $validator = $this->validate($request,[
+        'noserie' => 'required|string|max:9|unique:hardware',
+        'noinventario' => 'required|string|max:9|unique:hardware'
+    ]);
       try {
         $ubicacion   = Ubicacion::where('aula','=','centro de computo')->firstOrFail();;
         $responsable = Responsable::where('rol', '=', 'jefe de centro de computo')->firstOrFail();
