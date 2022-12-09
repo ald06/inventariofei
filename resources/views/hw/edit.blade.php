@@ -24,8 +24,10 @@
           <div class="form-group col-md-4">
             <label for="tipo">Tipo</label>
             <select class="form-control" name="tipo" id="tipo" required>
-              <option value="" @if(old('tipo') == "") selected @endif>Elija una opcion</option>
-
+              <option value=""></option>
+                @foreach ($tiposhardware as $tipohardware)
+                    <option value="{{$tipohardware->id}}" @if($tipohardware->id == $hardware->tipo ) selected @endif>{{$tipohardware->nomHardware}}</option>
+                @endforeach
             </select>
          </div>
         </div>
@@ -39,10 +41,12 @@
             <input type="text" id="modelo" name="modelo" value="{{$hardware->modelo }}" class="form-control text-center text-uppercase" placeholder="" required>
           </div>
           <div class="form-group col-md-4">
-            <label for="estatus">tipo adquisicion pendiente</label>
-            <select class="form-control" name="estatus" id="estatus" required>
-              <option value="" @if(old('estatus') == "") selected @endif>Elija un opcion</option>
-
+            <label for="tiposAdquisicion">Forma de adquisicion</label>
+            <select class="form-control" name="tiposAdquisicion" id="tiposAdquisicion" required>
+              <option value=""></option>
+              @foreach ($tiposadquisicion as $tipoadquisicion)
+                <option value="{{$tipoadquisicion->id}}" @if($tipoadquisicion->id == $bien->tipoadquisicion_id ) selected @endif>{{$tipoadquisicion->nombre}}</option>
+              @endforeach
             </select>
          </div>
         </div>
@@ -66,4 +70,16 @@
       {!! Form::close() !!}
     </div>
   </div>
+@endsection
+@section('scripts')
+<script>
+$(document).ready(function() {
+  $('#tiposAdquisicion').select2({
+    placeholder: "tipo Adquisicion"
+  });
+  $('#tipo').select2({
+    placeholder: "Tipo Hardware"
+  });
+});
+</script>
 @endsection

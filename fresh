@@ -1,0 +1,11 @@
+[32mNothing to migrate.[39m
+[33mSeeding:[39m EstatusSeeder
+[32mSeeded:[39m  EstatusSeeder (0.03 seconds)
+[32mEstatusSeeder have been created![39m
+[33mSeeding:[39m ResponsableSeeder
+[32mSeeded:[39m  ResponsableSeeder (0.05 seconds)
+[32mResponsableSeeder have been created![39m
+[33mSeeding:[39m UbicacionSeeder
+[32mSeeded:[39m  UbicacionSeeder (0.04 seconds)
+[32mUbicacionSeeder have been created![39m
+[32mDatabase seeding completed successfully.[39m

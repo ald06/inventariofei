@@ -32,9 +32,9 @@ class HardwareController extends Controller
                <i class="fas fa-bars fa-lg"></i>
              </button>
              <div class="dropdown-menu">
-                <a href="'.route('hardware.show', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
+                <a href="'.route('hardware.show', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-info-circle"></i> Detalle </a>
              <div class="dropdown-divider my-1"></div>
-                <a href="'.route('hardware.edit', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
+                <a href="'.route('hardware.edit', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar </a>
              <div class="dropdown-divider my-1"></div>
              <form action="'.route('hardware.destroy', $hardware->id).'" method="POST">
                  <input name="_token" type="hidden" value="'.csrf_token().'">
@@ -78,6 +78,7 @@ class HardwareController extends Controller
      */
     public function store(Request $request)
     {
+      // dd($request);
       $validator = $this->validate($request,[
         'noserie' => 'required|string|max:9|unique:biens',
         'noinventario' => 'required|string|max:9|unique:biens'
@@ -90,7 +91,8 @@ class HardwareController extends Controller
         $bien->noinventario = $request->noinventario;
         $bien->responsable_id = $responsable->id;
         $bien->ubicacion_id = $ubicacion->id;
-        $bien->estatus_id = $request->estatus;
+        $bien->estatus_id = 1;
+        $bien->tipoadquisicion_id = $request->tiposAdquisicion;
         $bien->save();
         $ultimobien = Bien::latest('id')->first();
         $hardware = new Hardware;
@@ -117,9 +119,19 @@ class HardwareController extends Controller
      * @param  \App\Hardware  $hardware
      * @return \Illuminate\Http\Response
      */
-    public function show(Hardware $hardware)
+    public function show($id)
     {
-        //
+
+      $hardware = Hardware::findOrFail($id);
+
+
+      $hardware = Hardware::findOrFail($id);
+      $bien = Bien::findOrFail($hardware->bien_id);
+      $responsable = Responsable::findOrFail($bien->responsable_id);
+      $ubicacion = Ubicacion::findOrFail($bien->ubicacion_id);
+      $tiposadquisicion = tiposAdquisicion::findOrFail($bien->ubicacion_id);
+      $tiposhardware = TiposHardware::findOrFail($bien->ubicacion_id);
+      return view('hw.show', compact('hardware','bien','responsable','ubicacion','tiposhardware','tiposadquisicion'));
     }
 
     /**
@@ -130,10 +142,11 @@ class HardwareController extends Controller
      */
     public function edit($id)
     {
-
+      $tiposadquisicion = tiposAdquisicion::all();
+      $tiposhardware = tiposhardware::all();
       $hardware = Hardware::findOrFail($id);
       $bien = Bien::findOrFail($hardware->bien_id);
-      return view('hw.edit', compact('hardware','bien'));
+      return view('hw.edit', compact('hardware','bien','tiposadquisicion','tiposhardware'));
     }
 
     /**
@@ -143,9 +156,35 @@ class HardwareController extends Controller
      * @param  \App\Hardware  $hardware
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hardware $hardware)
+    public function update(Request $request,$id)
     {
-        //
+
+      $validator = $this->validate($request,[
+        'noserie' => 'required|string|max:9|',
+        'noinventario' => 'required|string|max:9|'
+    ]);
+      try {
+        $hardware = Hardware::findOrFail($id);
+        $bien =  Bien::findOrFail($hardware->bien_id);
+
+        $bien->noserie = $request->noserie;
+        $bien->noinventario = $request->noinventario;
+        $bien->tipoadquisicion_id = $request->tiposAdquisicion;
+        $bien->save();
+
+        $hardware->marca = $request->marca;
+        $hardware->modelo = $request->modelo;
+        $hardware->tipo = $request->tipo;
+        $hardware->caracteristicas = $request->caracteristicas;
+        $hardware->observaciones = $request->observaciones;
+        $hardware->save();
+      } catch (\Exception $e) {
+          $errors = $e;
+      return redirect()->back()->with('errors', $errors);
+  }
+
+
+    return redirect('hardware')->with('message', 'Actualizacion Exitosa');
     }
 
     /**

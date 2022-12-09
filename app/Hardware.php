@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Hardware extends Model
 {
   use SoftDeletes;
-  
+
   protected $primaryKey = 'id';
   protected $fillable = [
     'marca',

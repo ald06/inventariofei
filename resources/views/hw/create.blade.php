@@ -25,7 +25,9 @@
             <label for="tipo">Tipo</label>
             <select class="form-control" name="tipo" id="tipo" required>
               <option value="" @if(old('tipo') == "") selected @endif>Elija una opcion</option>
-
+                @foreach ($tiposhardware as $tipohardware)
+                  <option value="{{$tipohardware->id}}"> {{$tipohardware->nomHardware}}</option>
+                @endforeach
             </select>
          </div>
         </div>
@@ -39,12 +41,12 @@
             <input type="text" id="modelo" name="modelo" value="{{ old('modelo') }}" class="form-control text-center text-uppercase" placeholder="" required>
           </div>
           <div class="form-group col-md-4">
-            <label for="estatus">Forma de adquisicion</label>
-            <select class="form-control" name="estatus" id="estatus" required>
-              <option value="" @if(old('estatus') == "") selected @endif>Elija un opcion</option>
-                @foreach ($tiposadquisicion as $tipoadquisicion)
-              <option value="{{$tipoadquisicion->id}}"> {{$tipoadquisicion->nombre}}</option>
-            @endforeach
+            <label for="tiposAdquisicion">Forma de adquisicion</label>
+            <select class="form-control" name="tiposAdquisicion" id="tiposAdquisicion" required>
+              <option value="" @if(old('tiposAdquisicion') == "") selected @endif>Elija un opcion</option>
+              @foreach ($tiposadquisicion as $tipoadquisicion)
+                <option value="{{$tipoadquisicion->id}}"> {{$tipoadquisicion->nombre}}</option>
+              @endforeach
             </select>
          </div>
         </div>

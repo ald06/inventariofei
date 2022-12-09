@@ -18,5 +18,10 @@ class DatabaseSeeder extends Seeder
         $this->command->info('ResponsableSeeder have been created!');
         $this->call('UbicacionSeeder');
         $this->command->info('UbicacionSeeder have been created!');
+        $this->call('tipoHardwareSeeder');
+        $this->command->info('tipoHardwareSeeder have been created!');
+        $this->call('tipoAdquisicionSeeder');
+        $this->command->info('tipoAdquisicionSeeder have been created!');
+
     }
 }
