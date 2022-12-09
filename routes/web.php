@@ -95,3 +95,6 @@ Route::get('/verInformacion', function () {
     return view('verInformacion');
 });
 */
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
