@@ -15,6 +15,7 @@ class CreateTiposAdquisicionsTable extends Migration
     {
         Schema::create('tipos_adquisicions', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
             $table->timestamps();
         });
     }

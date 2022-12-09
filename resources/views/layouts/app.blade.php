@@ -208,36 +208,6 @@ section{
                 </div>
               </div>
             </div>
-
-
-            <div class="modal fade"  role="dialog" id="ModalShortCut" data-backdrop="static" data-keyboard="false">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content rounded">
-                  <div class="modal-header bg-secondary">
-                    <h5 class="modal-title">Atajos de teclado</h5>
-                     <button type="button" class="close text-white btn-secondary" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="col-md-12 text-left ">
-                      <p><span class="keyboard-Key">Alt </span>+ <span class="keyboard-Key">Shift ↑ </span>+ <span class="keyboard-Key">W </span>= <strong>Asignar solicitudes</strong></p>
-                      @if(session()->get('rol') != 'Fiscal')
-                      <p><span class="keyboard-Key">Alt </span>+ <span class="keyboard-Key">Shift ↑ </span>+ <span class="keyboard-Key">S </span>= <strong>Lista de solicitudes</strong></p>
-                      @endif
-                      <p><span class="keyboard-Key">Alt </span>+ <span class="keyboard-Key">Shift ↑ </span>+ <span class="keyboard-Key">A </span>= <strong>Lista de asignaciones</strong></p>
-                      <p><span class="keyboard-Key">Alt </span>+ <span class="keyboard-Key">Shift ↑ </span>+ <span class="keyboard-Key">D </span>= <strong>Dictámenes</strong></p>
-                      <p><span class="keyboard-Key">Alt </span>+ <span class="keyboard-Key">Shift ↑ </span>+ <span class="keyboard-Key">C </span>= <strong>Cadáveres</strong></p>
-                      @if(session()->get('rol') != 'Fiscal')
-                      <p><span class="keyboard-Key">Alt </span>+ <span class="keyboard-Key">Shift ↑ </span>+ <span class="keyboard-Key">R </span>= <strong>Registrar solicitud de dictámen</strong></p>
-                      @endif
-                      <p><span class="keyboard-Key">Alt </span>+ <span class="keyboard-Key">Shift ↑ </span>+ <span class="keyboard-Key">O </span>= <strong>Cerrar sesión</strong></p>
-                      <p><span class="keyboard-Key">Alt </span>+ <span class="keyboard-Key">Shift ↑ </span>+ <span class="keyboard-Key">K </span>= <strong>Atajos de teclado</strong></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 			</div><!--/. container-fluid -->
 		</section>
 

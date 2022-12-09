@@ -77,13 +77,13 @@ class SoftwareController extends Controller
         $bien->save();
         $ultimobien = Bien::latest('id')->first();
         $software = new Software;
-        $software->nombre            = $request->nombre;--
-        $software->version           = $request->version;---
+        $software->nombre            = $request->nombre;
+        $software->version           = $request->version;
         $software->descripcion       = $request->descripcion;
         $software->tipoSoftware      = $request->tipoSoftware;
-        $software->licencia          = $request->licencia;-----
+        $software->licencia          = $request->licencia;
         $software->disponibilidad    = $request->disponibilidad;
-        $software->equiposPermitidos = $request->equiposPermitidos;------
+        $software->equiposPermitidos = $request->equiposPermitidos;
         $software->equiposOcupados   = 0;
         $software->bien_id           = $ultimobien->id;
         $software->save();

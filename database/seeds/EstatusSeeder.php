@@ -13,10 +13,24 @@ class EstatusSeeder extends Seeder
      */
     public function run()
     {
-      for ($i=0; $i < 10; $i++) {
+
         $estatus= new Estatus;
-        $estatus->tipoEstatus  = "estatus".$i;
+        $estatus->tipoEstatus  = "Disponible";
         $estatus->save();
-    }
+
+        $estatus= new Estatus;
+        $estatus->tipoEstatus  = "Mantenimiento";
+        $estatus->save();
+
+        $estatus= new Estatus;
+        $estatus->tipoEstatus  = "Asignado";
+        $estatus->save();
+
+        $estatus= new Estatus;
+        $estatus->tipoEstatus  = "Baja";
+        $estatus->save();
+
+
+
   }
 }

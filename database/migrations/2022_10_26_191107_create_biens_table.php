@@ -23,6 +23,8 @@ class CreateBiensTable extends Migration
             $table->foreign('ubicacion_id')->references('id')->on('ubicacions');
             $table->unsignedBigInteger('estatus_id');
             $table->foreign('estatus_id')->references('id')->on('estatuses');
+            $table->unsignedBigInteger('tipoadquisicion_id');
+            $table->foreign('tipoadquisicion_id')->references('id')->on('tipos_adquisicions');
             $table->timestamps();
             $table->softdeletes();
         });

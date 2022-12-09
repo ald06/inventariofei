@@ -7,21 +7,56 @@
   <div class="container mt-3">
     <div class="card text-center">
       <div class="card-header">
-        <h3 class="float-left">Editar bien</h3>
-        <a href="{{url('bien')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right"><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
+        <h3 class="float-left">Correccion de datos del Hadware</h3>
+        <a href="{{url('hardware')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right "><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
       </div>
-      {!! Form::model($bien, ['action' => ['BienController@update', $bien->id], 'method' => 'PUT']) !!}
+      {!! Form::model($hardware, ['action' => ['HardwareController@update', $hardware->id], 'method' => 'PUT']) !!}
       <div class="card-body">
-        <div class="form-group row justify-content-center my-5">
-          <label for="noserie" class="col-sm-2 col-form-label">No serie</label>
-          <div class="col-sm-10">
-            <input type="text" id="noserie" name="noserie" value="{{$bien->noserie}}" class="form-control text-center" placeholder="" maxlength="10">
+        <div class="form-row">
+           <div class="form-group col-md-4">
+             <label for="noserie">No de serie</label>
+             <input type="text" id="noserie" name="noserie" value="{{ $bien->noserie }}" class="form-control text-center text-uppercase" placeholder="" required>
+           </div>
+          <div class="form-group col-md-4">
+            <label for="noinventario">No de inventario</label>
+            <input type="text" id="noinventario" name="noinventario" value="{{ $bien->noinventario }}" class="form-control text-center text-uppercase" placeholder="" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="tipo">Tipo</label>
+            <select class="form-control" name="tipo" id="tipo" required>
+              <option value="" @if(old('tipo') == "") selected @endif>Elija una opcion</option>
+
+            </select>
+         </div>
+        </div>
+        <div class="form-row">
+           <div class="form-group col-md-4">
+             <label for="marca">Marca</label>
+             <input type="text" id="marca" name="marca" value="{{$hardware->marca }}" class="form-control text-center text-uppercase" placeholder="" required>
+           </div>
+          <div class="form-group col-md-4">
+            <label for="modelo">Modelo</label>
+            <input type="text" id="modelo" name="modelo" value="{{$hardware->modelo }}" class="form-control text-center text-uppercase" placeholder="" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="estatus">tipo adquisicion pendiente</label>
+            <select class="form-control" name="estatus" id="estatus" required>
+              <option value="" @if(old('estatus') == "") selected @endif>Elija un opcion</option>
+
+            </select>
+         </div>
+        </div>
+     </div>
+        <div class="form-group row justify-content-center my-4">
+          <label for="caracteristicas" class="col-sm-2 col-form-label">Caracteristicas </label>
+          <div class="col-sm-9">
+            <textarea class="form-control" name = "caracteristicas" id="caracteristicas" rows="3"> {{ $hardware->caracteristicas }} </textarea required>
           </div>
         </div>
-        <div class="form-group row justify-content-center my-5">
-          <label for="noinventario" class="col-sm-2 col-form-label">No inventario</label>
-          <div class="col-sm-10">
-            <input type="text" id="noinventario" name="noinventario" value="{{$bien->noinventario}}" class="form-control text-center" placeholder="">
+        <div class="form-group row justify-content-center my-4">
+          <label for="observaciones" class="col-sm-2 col-form-label">Observaciones</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" name = "observaciones" id="observaciones" rows="3"> {{ $hardware->caracteristicas }} </textarea required>
           </div>
         </div>
         <div class="row justify-content-center mt-4">

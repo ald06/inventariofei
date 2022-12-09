@@ -6,6 +6,9 @@ use App\Hardware;
 use App\Bien;
 use App\Responsable;
 use App\Ubicacion;
+use App\tiposadquisicion;
+use App\tiposhardware;
+
 use Illuminate\Http\Request;
 use Redirect,Response,DB,Config;
 use Datatables;
@@ -29,9 +32,22 @@ class HardwareController extends Controller
                <i class="fas fa-bars fa-lg"></i>
              </button>
              <div class="dropdown-menu">
-               <a href="'.route('hardware.edit', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
-             <div class="dropdown-divider my-1"></div>';
+                <a href="'.route('hardware.show', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
+             <div class="dropdown-divider my-1"></div>
+                <a href="'.route('hardware.edit', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
+             <div class="dropdown-divider my-1"></div>
+             <form action="'.route('hardware.destroy', $hardware->id).'" method="POST">
+                 <input name="_token" type="hidden" value="'.csrf_token().'">
+                 <input name="_method" type="hidden" value="DELETE">
+                <button type="submit" class="dropdown-item "><i class="fas fa-times-circle fa-fw fa-lg text-danger"></i> Baja </button>
+            </form>
+              </div>
+            </div>'
+
+             ;
      })
+
+
    ->rawColumns(['actions'])
    ->make(true);
     }
@@ -48,9 +64,10 @@ class HardwareController extends Controller
     public function create()
     {
 
-      // dd($ubicaciones);
+      $tiposadquisicion = tiposAdquisicion::all();
+      $tiposhardware = tiposhardware::all();
       $hardware = new Hardware;
-      return view('hw.create', compact('hardware'));
+      return view('hw.create', compact('hardware','tiposadquisicion','tiposhardware'));
     }
 
     /**
@@ -62,8 +79,8 @@ class HardwareController extends Controller
     public function store(Request $request)
     {
       $validator = $this->validate($request,[
-        'noserie' => 'required|string|max:9|unique:hardware',
-        'noinventario' => 'required|string|max:9|unique:hardware'
+        'noserie' => 'required|string|max:9|unique:biens',
+        'noinventario' => 'required|string|max:9|unique:biens'
     ]);
       try {
         $ubicacion   = Ubicacion::where('aula','=','centro de computo')->firstOrFail();;
@@ -111,9 +128,12 @@ class HardwareController extends Controller
      * @param  \App\Hardware  $hardware
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hardware $hardware)
+    public function edit($id)
     {
-        //
+
+      $hardware = Hardware::findOrFail($id);
+      $bien = Bien::findOrFail($hardware->bien_id);
+      return view('hw.edit', compact('hardware','bien'));
     }
 
     /**
@@ -134,8 +154,14 @@ class HardwareController extends Controller
      * @param  \App\Hardware  $hardware
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hardware $hardware)
+    public function destroy($id)
     {
-        //
+      $hardware = Hardware::findOrFail($id);
+      $bien =  Bien::findOrFail($hardware->bien_id);;
+      $bien->estatus_id = 4;
+      $bien->save();
+      $hardware->delete();
+      $bien->delete();
+      return redirect('hardware/')->with('message', 'Hardware Eliminado Correctamente');
     }
 }

@@ -13,7 +13,7 @@
         <div class="card-body">
             {!! Form::model($tiposAdquisicion, ['action' => 'TiposAdquisicionController@store']) !!}
             <div class="col-md-12">
-                <label for="nombre">Nombre del Hardware</label>
+                <label for="nombre">Tipo de adquisicion</label>
                 <input type="text" id="nombre"  name="nombre" value="{{ old('nombre') }}" class="form-control" require>
                 <div class="row justify-content-center mt-4">
                 <button type="submit" class="btn btn-danger btn-block col-md-3"><i class="fas fa-save fa-fw fa-lg"></i> Agregar</button>
