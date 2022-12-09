@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class UbicacionController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +34,7 @@ class UbicacionController extends Controller
    ->rawColumns(['actions'])
    ->make(true);
     }
-    
+
     public function index()
     {
         return view ('ubicacion.index');
@@ -67,7 +72,7 @@ class UbicacionController extends Controller
             return redirect()->back()->with('errors', $errors);
         }
         return redirect('ubicacion')->with('message', 'Registro Exitoso');
-    
+
     }
 
     /**
@@ -105,7 +110,7 @@ class UbicacionController extends Controller
         $ubicacion = Ubicacion::findOrFail($id);
         $ubicacion->fill($request->all())->save();
         return redirect('ubicacion')->with('message', 'Ubicacion Editada');
-    
+
     }
 
     /**

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ResponsableController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,10 +41,10 @@ class ResponsableController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index() 
+    public function index()
     {
         return view ('responsable.index');
-    } 
+    }
     public function create()
     {
         $responsable = new Responsable;
@@ -68,7 +73,7 @@ class ResponsableController extends Controller
             return redirect()->back()->with('errors', $errors);
         }
         return redirect('responsable')->with('message', 'Registro Exitoso');
-    
+
     }
 
     /**
