@@ -48,10 +48,8 @@ class SoftwareController extends Controller
      */
     public function create()
     {
-      $ubicaciones  = Ubicacion::all();
-      $responsables = Responsable::all();
       $software = new Software;
-      return view('sw.create', compact('software','ubicaciones','responsables'));
+      return view('sw.create', compact('software'));
     }
 
     /**
@@ -62,7 +60,38 @@ class SoftwareController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      dd($request);
+      $validator = $this->validate($request,[
+        'noserie' => 'required|string|max:9|unique:biens',
+        'noinventario' => 'required|string|max:9|unique:biens'
+    ]);
+      try {
+        $ubicacion   = Ubicacion::where('aula','=','centro de computo')->firstOrFail();;
+        $responsable = Responsable::where('rol', '=', 'jefe de centro de computo')->firstOrFail();
+        $bien =  new Bien;
+        $bien->noserie        = $request->noserie;
+        $bien->noinventario   = $request->noinventario;
+        $bien->responsable_id = $responsable->id;
+        $bien->ubicacion_id   = $ubicacion->id;
+        $bien->estatus_id     = $request->estatus;
+        $bien->save();
+        $ultimobien = Bien::latest('id')->first();
+        $software = new Software;
+        $software->nombre            = $request->nombre;--
+        $software->version           = $request->version;---
+        $software->descripcion       = $request->descripcion;
+        $software->tipoSoftware      = $request->tipoSoftware;
+        $software->licencia          = $request->licencia;-----
+        $software->disponibilidad    = $request->disponibilidad;
+        $software->equiposPermitidos = $request->equiposPermitidos;------
+        $software->equiposOcupados   = 0;
+        $software->bien_id           = $ultimobien->id;
+        $software->save();
+      } catch (\Exception $e) {
+          $errors = $e;
+          return redirect()->back()->with('errors', $errors);
+     }
+    return redirect('hardware')->with('message', 'Registro Exitoso');
     }
 
     /**

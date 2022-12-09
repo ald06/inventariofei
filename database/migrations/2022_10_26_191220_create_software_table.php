@@ -21,8 +21,8 @@ class CreateSoftwareTable extends Migration
           $table->string('tipoSoftware');
           $table->string('licencia');
           $table->string('disponibilidad');
-          $table->string('equiposPermitidos');
-          $table->string('equiposOcupados');
+          $table->integer('equiposPermitidos');
+          $table->integer('equiposOcupados');
           $table->unsignedBigInteger('bien_id');
           $table->foreign('bien_id')->references('id')->on('biens');
           $table->timestamps();
