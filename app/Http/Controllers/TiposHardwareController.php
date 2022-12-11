@@ -28,7 +28,11 @@ class TiposHardwareController extends Controller
              </button>
              <div class="dropdown-menu">
                <a href="'.route('tiposhardware.edit', $tiposHardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
-               <a href="'.route('tiposhardware.destroy', $tiposHardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Eliminar</a>
+               <form action="'.route('tiposhardware.destroy', $tiposHardware->id).'" method="POST">
+                 <input name="_token" type="hidden" value="'.csrf_token().'">
+                 <input name="_method" type="hidden" value="DELETE">
+                <button type="submit" class="dropdown-item "><i class="fas fa-times-circle fa-fw fa-lg text-danger"></i> Baja </button>
+            </form>
                <div class="dropdown-divider my-1"></div>';
      })
    ->rawColumns(['actions'])
@@ -106,8 +110,16 @@ class TiposHardwareController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $tiposHardware = TiposHardware::findOrFail($id);
-      $tiposHardware->fill($request->all())->save();
+      $validator = $this->validate($request,[
+        'nomHardware' => 'required|string|max:10|unique:tipos_hardware'
+       ]);
+       try{
+        $tiposHardware = TiposHardware::findOrFail($id);
+        $tiposHardware->fill($request->all())->save();
+       }catch(\Exception $e){
+        $errors = $e;
+            return redirect()->back()->with('errors', $errors);
+       }
       return redirect('tiposhardware')->with('message', 'Equipo Editado');
     }
 
@@ -120,7 +132,7 @@ class TiposHardwareController extends Controller
     public function destroy(Request $request, $id)
     {
       $tiposHardware = TiposHardware::findOrFail($id);
-      $tiposHardware->softDelete();
-      return redirect('tiposhardware')->with('message', 'Bien Editado');
+      $tiposHardware->delete();
+      return redirect('tiposhardware/')->with('message', 'Hardware Eliminado Correctamente');
     }
 }

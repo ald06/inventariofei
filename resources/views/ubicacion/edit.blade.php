@@ -5,9 +5,9 @@
 
 @section('content')
 <div class="container mt-3">
-    <div class="card text-center">
+    <div class="card">
     <div class="card-header">
-        <h3 class="float-left">Añadir Ubicacion</h3>
+        <h3 class="float-left">Corrección de datos de la Ubicación</h3>
         <a href="{{url('ubicacion')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right "><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
       </div>
         <div class="card-body">

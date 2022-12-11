@@ -8,7 +8,7 @@
     <div class="card text-center">
       <div class="card-header">
         <h3 class="float-left">Correccion de datos del Hadware</h3>
-        <a href="{{url('hardware')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right "><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
+<a href="{{url('hardware')}}" role="button" name="button" class="btn btn-dan        ger col-md-2 float-right "><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
       </div>
       {!! Form::model($hardware, ['action' => ['HardwareController@update', $hardware->id], 'method' => 'PUT']) !!}
       <div class="card-body">

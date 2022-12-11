@@ -28,7 +28,11 @@ class UbicacionController extends Controller
              </button>
              <div class="dropdown-menu">
                <a href="'.route('ubicacion.edit', $ubicacion->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
-               <a href="'.route('ubicacion.destroy', $ubicacion->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Eliminar</a>
+               <form action="'.route('ubicacion.destroy', $ubicacion->id).'" method="POST">
+                 <input name="_token" type="hidden" value="'.csrf_token().'">
+                 <input name="_method" type="hidden" value="DELETE">
+                <button type="submit" class="dropdown-item "><i class="fas fa-times-circle fa-fw fa-lg text-danger"></i> Baja </button>
+            </form>
                <div class="dropdown-divider my-1"></div>';
      })
    ->rawColumns(['actions'])
@@ -107,10 +111,19 @@ class UbicacionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        $validator = $this->validate($request,[
+            'aula' => 'required|string|max:10|unique:ubicacions'
+        ]);
+        try {
         $ubicacion = Ubicacion::findOrFail($id);
         $ubicacion->fill($request->all())->save();
         return redirect('ubicacion')->with('message', 'Ubicacion Editada');
-
+    }catch(\Exception $e){
+        $errors = $e;
+        return redirect()->back()->with('errors', $errors);
+    }
+    return redirect('ubicacion')->with('message', 'Registro Exitoso');
     }
 
     /**
@@ -119,8 +132,10 @@ class UbicacionController extends Controller
      * @param  \App\Ubicacion  $ubicacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ubicacion $ubicacion)
+    public function destroy(Request $request, $id)
     {
-        //
+        $ubicacion = Ubicacion::findOrFail($id);
+        $ubicacion->delete();
+        return redirect('ubicacion/')->with('message', 'Hardware Eliminado Correctamente');
     }
 }

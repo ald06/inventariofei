@@ -20,7 +20,7 @@
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 				<li class="nav-item has-treeview ">
 					<a href="#" class="nav-link">
-						<i class="fa-regular fas fa-microchip"></i>						
+						<i class="fa-solid fas fa-desktop"></i>			
 						<p>
 							Hardware
 							<i class="right fa fa-angle-left "></i>
@@ -97,14 +97,14 @@
 					</ul>
 						<ul class="nav nav-treeview submenu">
 									<li class="nav-item submenuitem">
-										<a href="{{ url('/ubicacion') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+										<a href="{{ url('/ubicacion') }}" class="nav-link"><i class="fa-solid fas fa-location-arrow"></i>
 											<p class="submenuitem">Ubicaciones</p>
 										</a>
 									</li>
 								</ul>
 								<ul class="nav nav-treeview submenu">
 						<li class="nav-item submenuitem">
-							<a href="{{ url('/tiposadquisicion') }}" class="nav-link"><i class="fa-thin fa-money-check-dollar"></i>
+							<a href="{{ url('/tiposadquisicion') }}" class="nav-link"><i class="fa-solid fas fa-money-bill"></i>
 								<p class="submenuitem">Adquisiciones</p>
 							</a>
 						</li>

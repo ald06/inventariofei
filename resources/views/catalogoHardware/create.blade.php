@@ -14,7 +14,7 @@
             {!! Form::model($tiposHardware, ['action' => 'TiposHardwareController@store']) !!}
             <div class="col-md-12">
                 <label for="nomHardware">Nombre del Hardware</label>
-                <input type="text" id="nomHardware"  name="nomHardware" value="{{ old('nomHardware') }}" class="form-control" require>
+                <input type="text" id="nomHardware"  name="nomHardware" value="{{ old('nomHardware') }}" class="form-control" required>
                 <div class="row justify-content-center mt-4">
                 <button type="submit" class="btn btn-danger btn-block col-md-3"><i class="fas fa-save fa-fw fa-lg"></i> Agregar</button>
                 </div>

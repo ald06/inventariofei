@@ -28,7 +28,13 @@ class ResponsableController extends Controller
             </button>
             <div class="dropdown-menu">
               <a href="'.route('responsable.edit', $responsable->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
-            <div class="dropdown-divider my-1"></div>';
+              <form action="'.route('responsable.destroy', $responsable->id).'" method="POST">
+                 <input name="_token" type="hidden" value="'.csrf_token().'">
+                 <input name="_method" type="hidden" value="DELETE">
+                <button type="submit" class="dropdown-item "><i class="fas fa-times-circle fa-fw fa-lg text-danger"></i> Baja </button>
+            </form>
+              <div class="dropdown-divider my-1"></div>';
+            
     })
   ->rawColumns(['actions'])
   ->make(true);
@@ -108,8 +114,17 @@ class ResponsableController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $responsable = Responsable::findOrFail($id);
-      $responsable->fill($request->all())->save();
+      $validator = $this->validate($request,[
+        'matricula' => 'required|string|max:10|unique:responsables'
+       ]);
+       try{
+        $responsable = Responsable::findOrFail($id);
+        $responsable->fill($request->all())->save();
+       }catch(\Exception $e){
+        $errors = $e;
+            return redirect()->back()->with('errors', $errors);
+       }
+      
       return redirect('responsable')->with('message', 'Datos actualizados');
     }
 
@@ -123,7 +138,7 @@ class ResponsableController extends Controller
     {
       $responsable = Responsable::findOrFail($id);
       $responsable->delete();
-      return redirect('responsable')->with('message', 'Bien Editado');
+      return redirect('responsable/')->with('message', 'Responsable Eliminado Correctamente');
 
     }
 }

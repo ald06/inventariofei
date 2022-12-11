@@ -45,7 +45,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-excel fa-3x" data-toggle="tooltip" data-placement="top" title="Excel"></i>',
           extend: 'excelHtml5',
           fieldSeparator: '\t',
-          title : 'Materias',
+          title : 'Responsables',
             exportOptions: {
               columns: [ 0, ':visible' ]
             }
@@ -54,7 +54,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-csv fa-3x" data-toggle="tooltip" data-placement="top" title="CSV"></i>',
           extend: 'csvHtml5',
           fieldSeparator: '\t',
-          title : 'Materias',
+          title : 'Responsable',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -63,7 +63,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-pdf fa-3x" data-toggle="tooltip" data-placement="top" title="PDF"></i>',
           extend: 'pdfHtml5',
           fieldSeparator: '\t',
-          title : 'Materias',
+          title : 'Responsable',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -72,7 +72,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-print fa-3x" data-toggle="tooltip" data-placement="top" title="Imprimir"></i>',
           extend: 'print',
           fieldSeparator: '\t',
-          title : 'Materias',
+          title : 'Responsable',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
