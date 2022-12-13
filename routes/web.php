@@ -44,3 +44,8 @@ Route::resource('/ubicacion', 'UbicacionController');
 
 Route::get('/tiposadquisicion/getdata', 'TiposAdquisicionController@getData')->name('tiposAdquisicion.getData');
 Route::resource('/tiposadquisicion', 'TiposAdquisicionController');
+
+Route::get('/users/getdata', 'UsersController@getData')->name('register.getData');
+Route::resource('/users', 'UsersController');
+
+
