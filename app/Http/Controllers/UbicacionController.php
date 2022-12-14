@@ -21,7 +21,10 @@ class UbicacionController extends Controller
     {
      $ubicacion = Ubicacion::all();
      return datatables()->of($ubicacion)->addColumn('actions', function($ubicacion) {
-       return '
+        $rol = auth()->user()->rol;
+        if($rol == 'admin'){
+          $menuadmin =
+            '
          <div class="btn-group dropleft" data-toggle="tooltip" data-placement="top" title="Acciones">
              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                <i class="fas fa-bars fa-lg"></i>
@@ -34,6 +37,17 @@ class UbicacionController extends Controller
                 <button type="submit" class="dropdown-item "><i class="fas fa-times-circle fa-fw fa-lg text-danger"></i> Baja </button>
             </form>
                <div class="dropdown-divider my-1"></div>';
+        }else{
+            $menuadmin = '
+            <div class="btn-group dropleft" data-toggle="tooltip" data-placement="top" title="Acciones">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-bars fa-lg"></i>
+            </button>
+            <div class="dropdown-menu">
+            <p>Solo el administrador puede realizar acciones</p>
+              <div class="dropdown-divider my-1"></div>';
+        };
+        return $menuadmin;     
      })
    ->rawColumns(['actions'])
    ->make(true);
