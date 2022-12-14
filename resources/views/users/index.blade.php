@@ -20,7 +20,9 @@
         <table id="table" name="table" class="table table-hover display responsive no-wrap " width="100%">
           <thead class="thead text-white">
             <tr>
-              <th scope="col">nombre</th>
+              <th scope="col">name</th>
+              <th scope="col">email</th>
+              <th scope="col">rol</th>
               <th scope="col" data-priority="1" class="title text-white">Acciones</th>
             </tr>
           </thead>
@@ -84,9 +86,11 @@ $(document).ready( function () {
         //   title : 'Columnas',
         // },
     ],
-    ajax: "{{ url('user/getdata') }}",
+    ajax: "{{ url('users/getdata') }}",
     columns: [
-      { data: 'nombre'},
+      { data: 'name'},
+      { data: 'email'},
+      { data: 'rol'},
       { data: 'actions', className: "center", defaultContent: '<button class="edit btn btn-light disabled"> NO </button>' }
     ],
     language: {

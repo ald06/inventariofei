@@ -1,3 +1,7 @@
+@section('styles')
+    
+@endsection
+
 <aside class="main-sidebar  elevation-4 barra-izquierda" style="background-color:rgb(50, 49, 49)" id="barra">
 	<!-- Brand Logo -->
 	<a href="{{url('/')}}" class="brand-link hvr-icon-grow" style="position:relative; z-index:-1;">
@@ -6,20 +10,22 @@
 	</a>
 	<!-- Sidebar -->
 	<div class="sidebar font-weight-light">
+		
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-1 mb-1 d-flex hvr-icon-spin">
 			<div class="image ">
 				<i class="fa fa-user-circle hvr-icon" aria-hidden="true" style="color:white; font-size:33px;"></i>
 			</div>
+			
 			<div class="info d-block">
-				<small>usuario</small>
+				<small>Bienvenid@ {{ auth()->user()->name }}</small>
 			</div>
 		</div>
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 				<li class="nav-item has-treeview ">
-					<a href="#" class="nav-link">
+					<a href="#" class="nav-link hidden">
 						<i class="fa-solid fas fa-desktop"></i>			
 						<p>
 							Hardware
@@ -76,6 +82,11 @@
 								<li class="nav-item submenuitem">
 									<a href="{{ url('/responsable') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
 										<p class="submenuitem">Responsables</p>
+									</a>
+								</li>
+								<li class="nav-item submenuitem">
+									<a href="{{ url('/users') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+										<p class="submenuitem">Usuarios</p>
 									</a>
 								</li>
 							</ul>

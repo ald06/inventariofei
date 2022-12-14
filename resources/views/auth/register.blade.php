@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registrate') }}</div>
+                <div class="card-header">{{ __('Registrar usuario') }}
+                    <a href="{{url('users')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right "><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -40,6 +42,18 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="rol" class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
+                            <div class="col-md-6">
+                                <select name="rol" id="rol" class="form-control" required>
+                                    <option value="admin">Administrador</option>
+                                    <option value="academico">Academico</option>
+                                    <option value="tecnico">Tecnico</option>
+                                    <option value="mantenimiento">Mantenimiento</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
@@ -64,7 +78,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Registrarse') }}
+                                    {{ __('Registrar') }}
                                 </button>
                             </div>
                         </div>
