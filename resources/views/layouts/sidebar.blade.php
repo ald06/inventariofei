@@ -1,6 +1,4 @@
-@section('styles')
-    
-@endsection
+
 
 <aside class="main-sidebar  elevation-4 barra-izquierda" style="background-color:rgb(50, 49, 49)" id="barra">
 	<!-- Brand Logo -->
@@ -24,22 +22,25 @@
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-				<li class="nav-item has-treeview ">
-					<a href="#" class="nav-link hidden">
-						<i class="fa-solid fas fa-desktop"></i>			
-						<p>
-							Hardware
-							<i class="right fa fa-angle-left "></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview submenu">
-							<li class="nav-item submenuitem">
-								<a href="{{ url('/hardware') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
-									<p class="submenuitem">Registros</p>
-								</a>
-							</li>
-						</ul>
-				</li>
+				
+					<li class="nav-item has-treeview ">
+						<a href="#" class="nav-link ">
+							<i class="fa-solid fas fa-desktop"></i>			
+							<p>
+								Hardware
+								<i class="right fa fa-angle-left "></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview submenu">
+								<li class="nav-item submenuitem">
+									<a href="{{ url('/hardware') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+										<p class="submenuitem">Registros</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+				
+				
 				<li class="nav-item has-treeview ">
 					<a href="#" class="nav-link">
 						<i class="fa-solid fas fa-compact-disc"></i>

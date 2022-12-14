@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\TiposHardware;
@@ -21,7 +20,7 @@ class TiposHardwareController extends Controller
     {
      $tiposHardware = TiposHardware::all();
      return datatables()->of($tiposHardware)->addColumn('actions', function($tiposHardware) {
-       return '
+       return'    
          <div class="btn-group dropleft" data-toggle="tooltip" data-placement="top" title="Acciones">
              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                <i class="fas fa-bars fa-lg"></i>
@@ -33,7 +32,7 @@ class TiposHardwareController extends Controller
                  <input name="_method" type="hidden" value="DELETE">
                 <button type="submit" class="dropdown-item "><i class="fas fa-times-circle fa-fw fa-lg text-danger"></i> Baja </button>
             </form>
-               <div class="dropdown-divider my-1"></div>';
+               <div class="dropdown-divider my-1"></div>';     
      })
    ->rawColumns(['actions'])
    ->make(true);

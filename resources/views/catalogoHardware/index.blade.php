@@ -9,9 +9,11 @@
     <div class="card text-center">
       <div class="card-header">
         <h3 class="float-left">Catálogo de Hardware</h3>
-        <a href="{{url('tiposhardware/create')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right">
-          <i class="fas fa-plus"></i>
-        </a>
+        @if(Auth::user()->rol == "admin")
+          <a href="{{url('tiposhardware/create')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right">
+            <i class="fas fa-plus"></i>
+         </a>
+         @endif
       </div>
       <div class="card-body">
         {{-- <h5 class="card-title">Tabla con datatables</h5> --}}
