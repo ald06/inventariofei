@@ -17,7 +17,7 @@
             <label for="matricula">Matricula</label>
             <input type="text" id="matricula"  name="matricula" value="{{ old('matricula') }}" class="form-control" required pattern="[A-Za-z0-9]+">
             <label for="nombre">Nombre del Responsable</label>
-            <input type="text" id="nombre"  name="nombre" value="{{ old('nombre') }}" class="form-control" required pattern="[A-Za-z0-9]+">
+            <input type="text" id="nombre"  name="nombre" value="{{ old('nombre') }}" class="form-control" required pattern="[A-Za-z0-9 ]+">
             <label for="rol">Rol</label>
             <input type="text" id="rol"  name="rol" value="{{ old('rol') }}" class="form-control" required pattern="[A-Za-z0-9]+">
         </div>
