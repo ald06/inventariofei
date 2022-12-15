@@ -2,7 +2,7 @@
 
 <aside class="main-sidebar  elevation-4 barra-izquierda" style="background-color:rgb(50, 49, 49)" id="barra">
 	<!-- Brand Logo -->
-	<a href="{{url('/')}}" class="brand-link hvr-icon-grow" style="position:relative; z-index:-1;">
+	<a href="{{url('/home')}}" class="brand-link hvr-icon-grow" style="position:relative; z-index:-1;">
 		<img src="{{asset('img/fei.png')}}" alt="Logo" height="" class="hvr-icon brand-image img-circle elevation-3 mr-5">
 		<span class="navselement brand-text font-weight-light"> <b class="font-weight-bold" style="font-size:25px;color:rgb(41, 43, 200);">SIFEI</b> </span>
 	</a>

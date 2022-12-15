@@ -45,7 +45,6 @@ class TiposHardwareController extends Controller
         <div class="dropdown-menu">
         <p>Solo el administrador puede realizar acciones</p>
           <div class="dropdown-divider my-1"></div>';
-        
       };
        return $menuadmin;     
      })

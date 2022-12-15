@@ -15,11 +15,11 @@
         <div class="form-row">
            <div class="form-group col-md-4">
              <label for="noserie">No de serie</label>
-             <input type="text" id="noserie" name="noserie" value="{{ old('noserie') }}" class="form-control text-center text-uppercase" placeholder="" required>
+             <input type="text" id="noserie" name="noserie" value="{{ old('noserie') }}" class="form-control text-center text-uppercase" placeholder="" maxlength="9" required>
            </div>
           <div class="form-group col-md-4">
             <label for="noinventario">No de inventario</label>
-            <input type="text" id="noinventario" name="noinventario" value="{{ old('noinventario') }}" class="form-control text-center text-uppercase" placeholder="" required>
+            <input type="text" id="noinventario" name="noinventario" value="{{ old('noinventario') }}" class="form-control text-center text-uppercase" placeholder="" maxlength="9" required>
           </div>
           <div class="form-group col-md-4">
             <label for="tipo">Tipo</label>
