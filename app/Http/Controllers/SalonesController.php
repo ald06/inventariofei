@@ -73,7 +73,7 @@ class SalonesController extends Controller
     public function store(Request $request)
     {
        $validator = $this->validate($request,[
-        'lugar' => 'required|string|max:10|unique:salones'
+        'lugar' => 'required|string|max:20|unique:salones'
        ]);
         try {
             $salones = new Salones;

@@ -90,7 +90,7 @@ $(document).ready( function () {
     columns: [
       { data: 'lugar' },
       { data: 'fecha' },
-      { data: 'status' },
+      { data: 'estatus_id' },
       { data: 'encargado' },
       { data: 'observaciones' },
       { data: 'actions', className: "center", defaultContent: '<button class="edit btn btn-light disabled"> NO </button>' }

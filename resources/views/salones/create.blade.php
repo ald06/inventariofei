@@ -9,7 +9,7 @@
     <div class="card text-center">
     <div class="card-header"> 
     <h3 class="float-left">Registrar</h3>
-        <a href="{{url('responsable')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right "><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
+        <a href="{{url('salones')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right "><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
         </div> 
         {!! Form::model($salones, ['action' => 'SalonesController@store']) !!}
         <div class="card-body">  
