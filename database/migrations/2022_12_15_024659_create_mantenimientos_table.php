@@ -15,10 +15,14 @@ class CreateMantenimientosTable extends Migration
     {
         Schema::create('mantenimientos', function (Blueprint $table) {
             $table->id();
+            $table->string('nserie');
+            $table->string('dispositivo');
             $table->string('diagnostico');
-            $table->string('estatus');
+            $table->unsignedBigInteger('estatus_id');
+            $table->foreign('estatus_id')->references('id')->on('estatuses');
             $table->string('justificacion');
             $table->string('observaciones');
+            $table->date('fecha');
             $table->timestamps();
         });
     }

@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Salones;
 use Illuminate\Http\Request;
+use App\tiposhardware;
+use App\Responsable;
+use App\Ubicacion;
+use App\Hardware;
+use App\Bien;
 
 class SalonesController extends Controller
 {
@@ -53,8 +58,10 @@ class SalonesController extends Controller
     }
     public function create()
     {
+        $responsable = responsable::all();
+        $ubicacion = ubicacion::all();
         $salones = new Salones;
-        return view ('salones.create', compact ('salones'));
+        return view ('salones.create', compact ('salones','responsable','ubicacion'));
     }
 
     /**
@@ -66,15 +73,16 @@ class SalonesController extends Controller
     public function store(Request $request)
     {
        $validator = $this->validate($request,[
-        'dispositivo' => 'required|string|max:10|unique:salones'
+        'lugar' => 'required|string|max:10|unique:salones'
        ]);
         try {
             $salones = new Salones;
-            $salones->dispositivo = $request->dispositivo;
-            $salones->status = $request->status;
             $salones->lugar = $request->lugar;
             $salones->fecha = $request->fecha;
-            $salones->responsable = $request->responsable;            
+            $salones->estatus_id = $request->estatus;
+            $salones->encargado = $request->encargado;
+            $salones->observaciones = $request->observaciones;
+            
             $salones->save();
         }catch(\Exception $e){
             $errors = $e;
@@ -87,7 +95,7 @@ class SalonesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Salones $salones
+     * @param  \App\Salones  $salones
      * @return \Illuminate\Http\Response
      */
     public function show(Salones $salones)
@@ -111,13 +119,13 @@ class SalonesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Salones  $Salones
+     * @param  \App\Salones  $salones
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
       $validator = $this->validate($request,[
-        'dispositivo' => 'required|string|max:10|unique:salones'
+        'matricula' => 'required|string|max:10|unique:salones'
        ]);
        try{
         $salones = Salones::findOrFail($id);
@@ -133,14 +141,14 @@ class SalonesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Salones  $salones
+     * @param  \App\salones  $salones
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)
     {
       $salones = Salones::findOrFail($id);
       $salones->delete();
-      return redirect('salones/')->with('message', 'Eliminado Correctamente');
+      return redirect('salones/')->with('message', 'salones Eliminado Correctamente');
 
     }
 }

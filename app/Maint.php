@@ -3,18 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Salones extends Model
+class Maint extends Model
 {
+  protected $table='maints';
   protected $primaryKey = 'id';
   protected $fillable = [
-    'lugar',
-    'fecha',
+    'nserie',
+    'dispositivo',
+    'diagnostico',
     'estatus',
-    'encargado',
+    'justificacion',
     'observaciones',
+    'fecha',
   ];
- // protected $dates = ['deleted_at'];
-
 }

@@ -66,8 +66,13 @@
 							</a>
 							<ul class="nav nav-treeview submenu">
 								<li class="nav-item submenuitem">
-									<a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
-										<p class="submenuitem">Registros</p>
+									<a href="{{ url('mantenimiento/') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+										<p class="submenuitem">Registrar Equipos</p>
+									</a>
+								</li>
+                                <li class="nav-item submenuitem">
+									<a href="{{ url('salones/') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
+										<p class="submenuitem">Registar Aulas</p>
 									</a>
 								</li>
 							</ul>

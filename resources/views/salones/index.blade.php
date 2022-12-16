@@ -18,11 +18,11 @@
         <table id="table" name="table" class="table table-hover display responsive no-wrap " width="100%">
           <thead class="thead text-white">
             <tr>
-              <th scope="col">Dispositivo</th>
-              <th scope="col">Status</th>
               <th scope="col">Lugar</th>
               <th scope="col">Fecha</th>
-              <th scope="col">Responsable</th>
+              <th scope="col">Status</th>
+              <th scope="col">Encargado</th>
+              <th scope="col">Observaciones</th>
               <th scope="col" data-priority="1" class="title text-white">Acciones</th>
             </tr>
           </thead>
@@ -88,11 +88,11 @@ $(document).ready( function () {
     ],
     ajax: "{{ url('salones/getdata') }}",
     columns: [
-      { data: 'dispositivo' },
-      { data: 'status' },
       { data: 'lugar' },
       { data: 'fecha' },
-      { data: 'responsable' },
+      { data: 'status' },
+      { data: 'encargado' },
+      { data: 'observaciones' },
       { data: 'actions', className: "center", defaultContent: '<button class="edit btn btn-light disabled"> NO </button>' }
     ],
     language: {

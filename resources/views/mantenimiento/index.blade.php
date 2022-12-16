@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-
-
 @section('links')
 <link rel="stylesheet" type="text/css" href="{{ asset('datatables/dataTables.min.css') }}">
 @endsection
@@ -10,9 +8,9 @@
   <div class="container-fluid">
     <div class="card text-center">
       <div class="card-header">
-        <h3 class="float-left">Usuarios</h3>
+        <h3 class="float-left">Mantenimiento</h3>
         @if(Auth::user()->rol == "admin")
-        <a href="{{url('/register')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right">
+        <a href="{{url('mantenimiento/create')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right">
           <i class="fas fa-plus"></i>
         </a>
         @endif
@@ -22,9 +20,9 @@
         <table id="table" name="table" class="table table-hover display responsive no-wrap " width="100%">
           <thead class="thead text-white">
             <tr>
-              <th scope="col">name</th>
-              <th scope="col">email</th>
-              <th scope="col">rol</th>
+              <th scope="col">N.serie</th>
+              <th scope="col">Dispositivo</th>
+              <th scope="col">Diagnostico</th>      
               <th scope="col" data-priority="1" class="title text-white">Acciones</th>
             </tr>
           </thead>
@@ -35,6 +33,7 @@
 @endsection
 
 @section('scripts')
+
 <script src="{{ asset ('datatables/dataTables.min.js')}}"></script>
 <script>
 $(document).ready( function () {
@@ -49,7 +48,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-excel fa-3x" data-toggle="tooltip" data-placement="top" title="Excel"></i>',
           extend: 'excelHtml5',
           fieldSeparator: '\t',
-          title : 'Adquisiciones',
+          title : 'Mantenimiento',
             exportOptions: {
               columns: [ 0, ':visible' ]
             }
@@ -58,7 +57,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-csv fa-3x" data-toggle="tooltip" data-placement="top" title="CSV"></i>',
           extend: 'csvHtml5',
           fieldSeparator: '\t',
-          title : 'Adquisiciones',
+          title : 'Mantenimiento',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -67,7 +66,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-pdf fa-3x" data-toggle="tooltip" data-placement="top" title="PDF"></i>',
           extend: 'pdfHtml5',
           fieldSeparator: '\t',
-          title : 'Adquisiciones',
+          title : 'Mantenimiento',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -76,7 +75,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-print fa-3x" data-toggle="tooltip" data-placement="top" title="Imprimir"></i>',
           extend: 'print',
           fieldSeparator: '\t',
-          title : 'Adquisiciones',
+          title : 'Mantenimiento',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -88,13 +87,11 @@ $(document).ready( function () {
         //   title : 'Columnas',
         // },
     ],
-    ajax: "{{ url('users/getdata') }}",
+    ajax: "{{ url('mantenimiento/getdata') }}",
     columns: [
-      { data: 'name'},
-      { data: 'email'},
-      { data: 'email_verified_at'},
-      { data: 'password'},
-      { data: 'rol'},
+      { data: 'nserie' },
+      { data: 'dispositivo' },
+      { data: 'diagnostico' },
       { data: 'actions', className: "center", defaultContent: '<button class="edit btn btn-light disabled"> NO </button>' }
     ],
     language: {
@@ -126,5 +123,10 @@ $(document).ready( function () {
     }
   });
 });
+function Estatus(){
+    if(document.getElementById('estatus').value=="1"){
+        document.getElementById('estado').innerHTML="Disponible";
+    }
+}
 </script>
 @endsection

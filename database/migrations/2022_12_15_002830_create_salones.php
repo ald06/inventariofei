@@ -15,11 +15,12 @@ class CreateSalones extends Migration
     {
         Schema::create('salones', function (Blueprint $table) {
             $table->id();
-            $table->string('dispositivo');
-            $table->boolean('status');
             $table->string('lugar');
             $table->date('fecha');
-            $table->string('responsable');
+            $table->unsignedBigInteger('estatus_id');
+            $table->foreign('estatus_id')->references('id')->on('estatuses');
+            $table->string('encargado');
+            $table->string('observaciones');
             $table->timestamps();
             $table->softdeletes();
         });

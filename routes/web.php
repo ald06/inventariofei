@@ -42,6 +42,9 @@ Route::resource('/responsable', 'ResponsableController');
 Route::get('/salones/getdata', 'SalonesController@getData')->name('salones.getData');
 Route::resource('/salones', 'SalonesController');
 
+Route::get('/mantenimiento/getdata', 'MantenimientoController@getData')->name('mantenimiento.getData');
+Route::resource('/mantenimiento', 'MantenimientoController');
+
 Route::get('/ubicacion/getdata', 'UbicacionController@getData')->name('ubicacion.getData');
 Route::resource('/ubicacion', 'UbicacionController');
 
