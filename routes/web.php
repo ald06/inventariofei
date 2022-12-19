@@ -29,6 +29,12 @@ Route::resource('/bien', 'BienController');
 Route::get('/hardware/getdata', 'HardwareController@getData')->name('hardware.getData');
 Route::resource('/hardware', 'HardwareController');
 
+Route::get('/hardware/{hardware}/trans', 'HardwareController@trans')->name('hardware.trans');
+Route::resource('/hardware', 'HardwareController');
+
+Route::put('hardware/{hardware}/transfer', 'HardwareController@transfer')->name('hardware.transfer');
+Route::resource('/hardware', 'HardwareController');
+
 //rutas de bienes
 Route::get('/software/getdata', 'SoftwareController@getData')->name('software.getData');
 Route::resource('/software', 'SoftwareController');
