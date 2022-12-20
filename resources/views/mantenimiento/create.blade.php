@@ -12,7 +12,20 @@
         <a href="{{url('mantenimiento')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right "><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
         </div>  
         {!! Form::model($mantenimiento, ['action' => 'MantenimientoController@store']) !!}
-        <div class="card-body">     
+        <div class="card-body">  
+            <div class="form-group row justify-content-center my-4"> 
+            <div class="form-group col-md-4">    
+            <label for="nserie">N.Serie</label>
+                </div>    
+            <div class="col-sm-9">    
+            <select class="form-control" name="nserie" id="nserie" required>
+              <option value="nserie" @if(old('nserie') == "") selected @endif>Elija una opcion</option>
+                @foreach ($bien as $bien)
+                  <option value="{{$bien->id}}"> {{$bien->noserie}}</option>
+                @endforeach
+            </select>  
+            </div>
+            </div>    
         <div class="form-group row justify-content-center my-5">
           <label for="diagnostico" class="col-sm-2 col-form-label">Diagnostico </label>
             <div class="col-sm-9">
