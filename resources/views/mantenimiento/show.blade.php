@@ -8,7 +8,11 @@
       </div>
 
       <div class="card-body">
-        <div class="form-row">  
+        <div class="form-row"> 
+        <div class="form-group col-md-3">
+           <label for="nserie">nserie</label>
+           <input type="text" id="nserie" name="nserie" value="{{ $mantenimiento->nserie }}" class="form-control text-center text-uppercase" placeholder="" required disabled>
+         </div>    
         </div>{{-- row --}}
         <div class="form-group row justify-content-center my-4">
           <label for="justificacion" class="col-sm-2 col-form-label">Justificacion </label>
