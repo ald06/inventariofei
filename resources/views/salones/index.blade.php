@@ -22,9 +22,7 @@
             <tr>
               <th scope="col">Lugar</th>
               <th scope="col">Fecha</th>
-              <th scope="col">Status</th>
               <th scope="col">Encargado</th>
-              <th scope="col">Observaciones</th>
               <th scope="col" data-priority="1" class="title text-white">Acciones</th>
             </tr>
           </thead>
@@ -92,9 +90,7 @@ $(document).ready( function () {
     columns: [
       { data: 'lugar' },
       { data: 'fecha' },
-      { data: 'estatus_id' },
       { data: 'encargado' },
-      { data: 'observaciones' },
       { data: 'actions', className: "center", defaultContent: '<button class="edit btn btn-light disabled"> NO </button>' }
     ],
     language: {

@@ -17,8 +17,6 @@ class CreateSalones extends Migration
             $table->id();
             $table->string('lugar');
             $table->date('fecha');
-            $table->unsignedBigInteger('estatus_id');
-            $table->foreign('estatus_id')->references('id')->on('estatuses');
             $table->string('encargado');
             $table->string('observaciones');
             $table->timestamps();

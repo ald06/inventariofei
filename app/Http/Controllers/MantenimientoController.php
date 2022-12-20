@@ -79,9 +79,7 @@ class MantenimientoController extends Controller
         try {
             $mantenimiento = new Mantenimiento;
             $mantenimiento->nserie = $request->nserie;
-            $mantenimiento->dispositivo = $request->dispositivo;
             $mantenimiento->diagnostico = $request->diagnostico;
-            $mantenimiento->estatus_id = $request->estatus;
             $mantenimiento->justificacion = $request->justificacion;
             $mantenimiento->observaciones = $request->observaciones;
             $mantenimiento->fecha = $request->fecha;
@@ -146,7 +144,7 @@ class MantenimientoController extends Controller
         $mantenimiento = Mantenimiento::findOrFail($id);
         $mantenimiento->fill($request->all())->save();
         #$tiposhardware->nomHardware = $request->tiposHardware();
-        #$bien->noserie = $request->Bien();    
+        $bien->noserie = $request->Bien();    
        # $ubicacion->aula = $request->Ubicacion();
        # 
        # $responsable->nombre = $request->Responsable();

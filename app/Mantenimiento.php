@@ -10,9 +10,7 @@ class Mantenimiento extends Model
   protected $primaryKey = 'id';
   protected $fillable = [
     'nserie',
-    'dispositivo',
     'diagnostico',
-    'estatus',
     'justificacion',
     'observaciones',
     'fecha',

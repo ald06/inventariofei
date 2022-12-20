@@ -21,7 +21,6 @@
           <thead class="thead text-white">
             <tr>
               <th scope="col">N.serie</th>
-              <th scope="col">Dispositivo</th>
               <th scope="col">Diagnostico</th>      
               <th scope="col" data-priority="1" class="title text-white">Acciones</th>
             </tr>
@@ -90,7 +89,6 @@ $(document).ready( function () {
     ajax: "{{ url('mantenimiento/getdata') }}",
     columns: [
       { data: 'nserie' },
-      { data: 'dispositivo' },
       { data: 'diagnostico' },
       { data: 'actions', className: "center", defaultContent: '<button class="edit btn btn-light disabled"> NO </button>' }
     ],

@@ -8,12 +8,7 @@
       </div>
 
       <div class="card-body">
-        <div class="form-row">
-            <div class="form-group col-md-3">
-             <label for="estatus"> Estado </label>
-             <input type="text" id="estatus" name="estatus" value="{{ $mantenimiento->estatus_id }}" class="form-control text-center text-uppercase" placeholder="" required disabled>
-                <p id="estado"></p>
-           </div>    
+        <div class="form-row">  
         </div>{{-- row --}}
         <div class="form-group row justify-content-center my-4">
           <label for="justificacion" class="col-sm-2 col-form-label">Justificacion </label>
@@ -27,7 +22,7 @@
             <textarea class="form-control" name = "observaciones" id="observaciones" rows="3" disabled> {{ $mantenimiento->observaciones }} </textarea>     
           </div>
         <div class="col-sm-9">
-             <label for="fecha" class="col-sm-2 col-form-label">Fecha</label>
+             <label for="fecha" class="col-sm-2 col-form-label">Fecha de ingreso</label>
             <date class="form-control" name = "fecha" id="fecha" rows="3"> {{ $mantenimiento->fecha }} </date required> 
         </div>
         <div>

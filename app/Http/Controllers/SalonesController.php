@@ -32,6 +32,8 @@ class SalonesController extends Controller
               <i class="fas fa-bars fa-lg"></i>
             </button>
             <div class="dropdown-menu">
+            <a href="'.route('salones.show', $salones->id).'" role="button" class="dropdown-item"><i class="fas fa-info-circle"></i> Detalle </a>
+             <div class="dropdown-divider my-1"></div>
               <a href="'.route('salones.edit', $salones->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
               <form action="'.route('salones.destroy', $salones->id).'" method="POST">
                  <input name="_token" type="hidden" value="'.csrf_token().'">
@@ -79,7 +81,6 @@ class SalonesController extends Controller
             $salones = new Salones;
             $salones->lugar = $request->lugar;
             $salones->fecha = $request->fecha;
-            $salones->estatus_id = $request->estatus;
             $salones->encargado = $request->encargado;
             $salones->observaciones = $request->observaciones;
             
@@ -98,9 +99,11 @@ class SalonesController extends Controller
      * @param  \App\Salones  $salones
      * @return \Illuminate\Http\Response
      */
-    public function show(Salones $salones)
+    public function show($id)
     {
-        //
+         $salones = Salones::findOrFail($id);
+
+                return view('salones.show', compact('salones'));
     }
 
     /**
@@ -111,8 +114,10 @@ class SalonesController extends Controller
      */
     public function edit($id)
     {
+        $responsable = responsable::all();
+        $ubicacion = ubicacion::all();
         $salones = Salones::findOrFail($id);
-      return view('salones.edit', compact('salones'));
+      return view('salones.edit', compact('salones','ubicacion','responsable'));
     }
 
     /**
@@ -125,7 +130,7 @@ class SalonesController extends Controller
     public function update(Request $request, $id)
     {
       $validator = $this->validate($request,[
-        'matricula' => 'required|string|max:10|unique:salones'
+        'lugar' => 'required|string|max:10|unique:salones'
        ]);
        try{
         $salones = Salones::findOrFail($id);
@@ -148,7 +153,7 @@ class SalonesController extends Controller
     {
       $salones = Salones::findOrFail($id);
       $salones->delete();
-      return redirect('salones/')->with('message', 'salones Eliminado Correctamente');
+      return redirect('salones/')->with('message', 'Eliminado Correctamente');
 
     }
 }

@@ -8,30 +8,46 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="float-left">Corregir Datos</h3>
-                <a href="{{url('responsable')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right "><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
+                <a href="{{url('salones')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right "><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
             </div>
             <div class="card-body">
                 {!! Form::model($salones, ['action' => ['SalonesController@update', $salones->id], 'method' => 'PUT']) !!}
         </div>
         <div class="card-body">    
         {!! Form::model($salones, ['action' => 'SalonesController@store']) !!}
-        <div class="col">
-            <label for="dispositivo">Dispositivo</label>
-            <input type="text" id="dispositivo"  name="dispositivo" value="{{ old('dispositivo') }}" class="form-control" required pattern="[A-Za-z0-9]+">
-            <div class="form-group col-md-4">
-            <label for="estatus">Status</label>
-            <select class="form-control" name="status" id="status" required>
-              <option value="" @if(old('status') == "") selected @endif>Elija un opcion</option>
-              <option value="1" @if(old('status') == "Tarjeta") selected @endif>Disponible</option>
-              <option value="2" @if(old('status') == "Tarjeta") selected @endif>Ocupado </option>
-            </select>
-         </div>
-            <label for="rol">Lugar</label>
-            <input type="text" id="lugar"  name="lugar" value="{{ old('lugar') }}" class="form-control" required pattern="[A-Za-z0-9]+">
-            <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" value="{{ old('fecha') }}" class="form-control" required>
-            <label for="responsable">Nombre del Responsable</label>
-            <input type="text" id="responsable"  name="responsable" value="{{ old('responsable') }}" class="form-control" required>
+        <div class="card-body">  
+        <div class="form-row">
+             <div class="form-group col-md-4">
+            <label for="lugar">Lugar</label>
+            <select class="form-control" name="lugar" id="lugar" required>
+              <option value="lugar" @if(old('lugar') == "") selected @endif>Elija una opcion</option>
+                @foreach ($ubicacion as $ubicacion)
+                  <option value="{{$ubicacion->aula}}"> {{$ubicacion->aula}}</option>
+                @endforeach
+            </select>  
+            </div> 
+             <div class="form-group col-md-4">
+            <label for="encargardo">Encargado</label>
+            <select class="form-control" name="encargado" id="encargado" required>
+              <option value="encargado" @if(old('encargado') == "") selected @endif>Elija una opcion</option>
+                @foreach ($responsable as $responsable)
+                  <option value="{{$responsable->nombre}}"> {{$responsable->nombre}}</option>
+                @endforeach
+            </select>  
+            </div> 
+            </div>
+          <div class="form-group row justify-content-center my-5">
+          <label for="observaciones" class="col-sm-2 col-form-label">Observaciones</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" name = "observaciones" id="observaciones" rows="3"> {{ old('observaciones') }} </textarea >
+          </div>
+        </div>
+        <div class="form-group row justify-content-center my-5">    
+        <label for="fecha" class="col-sm-2 col-form-label">Fecha</label>
+        <div class="col-sm-9">    
+        <input type="date" id="fecha"  name="fecha" value="{{ old('fecha') }}" class="form-control" required pattern="[A-Za-z0-9 ]+">
+            </div>
+            </div>
         </div>
         <div class="row justify-content-center mt-4">
             <button type="submit" class="btn btn-danger btn-block col-md-3"><i class="fas fa-save fa-fw fa-lg"></i> Guardar</button>

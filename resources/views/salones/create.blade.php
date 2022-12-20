@@ -23,16 +23,6 @@
                 @endforeach
             </select>  
             </div> 
-            <div class="form-group col-md-4">
-            <label for="estatus">Status</label>
-            <select class="form-control" name="estatus" id="estatus" required>
-              <option value="" @if(old('estatus') == "") selected @endif>Elija un opcion</option>
-              <option value="1" @if(old('estatus') == "Tarjeta") selected @endif>Disponible</option>
-              <option value="2" @if(old('estatus') == "Tarjeta") selected @endif>Mantenimiento </option>
-              <option value="3" @if(old('estatus') == "Tarjeta") selected @endif>Asignado </option>
-              <option value="5" @if(old('estatus') == "Tarjeta") selected @endif>Progreso </option>
-            </select>
-         </div>
              <div class="form-group col-md-4">
             <label for="encargardo">Encargado</label>
             <select class="form-control" name="encargado" id="encargado" required>

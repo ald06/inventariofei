@@ -12,16 +12,44 @@
             </div>
             <div class="card-body">
                 {!! Form::model($mantenimiento, ['action' => ['MantenimientoController@update', $mantenimiento->id], 'method' => 'PUT']) !!}
-        <div class="form-row">
-            <div class="form-group col-md-4">
-            <label for="estatus">Status</label>
-            <select class="form-control" name="estatus" id="estatus" required>
-              <option value="" @if(old('estatus') == "") selected @endif>Elija un opcion</option>
-              <option value="1" @if(old('estatus') == "Tarjeta") selected @endif>Disponible</option>
-              <option value="2" @if(old('estatus') == "Tarjeta") selected @endif>Ocupado </option>
-            </select>
-         </div>
-                </div>
+            <div class="card-body">  
+            <div class="form-group row justify-content-center my-4"> 
+            <div class="form-group col-md-4">    
+            <label for="nserie">N.Serie</label>
+                </div>    
+            <div class="col-sm-9">    
+            <select class="form-control" name="nserie" id="nserie" required>
+              <option value="nserie" @if(old('nserie') == "") selected @endif>Elija una opcion</option>
+                @foreach ($bien as $bien)
+                  <option value="{{$bien->id}}"> {{$bien->noserie}}</option>
+                @endforeach
+            </select>  
+            </div>
+            </div>    
+        <div class="form-group row justify-content-center my-5">
+          <label for="diagnostico" class="col-sm-2 col-form-label">Diagnostico </label>
+            <div class="col-sm-9">
+            <textarea class="form-control" name = "diagnostico" id="diagnostico" rows="3"> {{ old('diagnostico') }} </textarea>
+          </div>
+        </div>
+     <div class="form-group row justify-content-center my-5">
+          <label for="justificacion" class="col-sm-2 col-form-label">Justificacion</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" name = "justificacion" id="justificacion" rows="3"> {{ old('justificacion') }} </textarea>
+          </div>
+        </div>
+     <div class="form-group row justify-content-center my-5">
+          <label for="observaciones" class="col-sm-2 col-form-label">Observaciones</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" name = "observaciones" id="observaciones" rows="3"> {{ old('observaciones') }} </textarea>
+          </div>
+         </div> 
+        <div class="form-group row justify-content-center my-5">    
+        <label for="fecha" class="col-sm-2 col-form-label">Fecha de Ingreso</label>
+        <div class="col-sm-9">    
+        <input type="date" id="fecha"  name="fecha" value="{{ old('fecha') }}" class="form-control" required pattern="[A-Za-z0-9 ]+">
+            </div>
+            </div>
         <div class="row justify-content-center mt-4">
             <button type="submit" class="btn btn-danger btn-block col-md-3"><i class="fas fa-save fa-fw fa-lg"></i> Guardar</button>
         </div>
