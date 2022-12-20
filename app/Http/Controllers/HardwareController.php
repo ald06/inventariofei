@@ -167,7 +167,7 @@ class HardwareController extends Controller
       $ubicacion = Ubicacion::all();
       $hardware = Hardware::findOrFail($id);
       $bien = Bien::findOrFail($hardware->bien_id);
-      return view('hw.trans', compact('hardware','bien','responsable','ubicacion'));
+      return view('hw.trans', compact('hardware','bien','responsable','ubicacion','tiposhardware','tiposadquisicion'));
     }
 
     /**
