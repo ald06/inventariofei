@@ -123,7 +123,6 @@ class MantenimientoController extends Controller
      # $responsable = responsable::all();
      #     
       #$tiposhardware = tiposhardware::all();
-     # $bien = bien::all();
       $mantenimiento = Mantenimiento::findOrFail($id);    
       return view('mantenimiento.edit', compact('mantenimiento'));#));#,'ubicacion',,'tiposhardware','bien''responsable'));
     }
@@ -137,14 +136,10 @@ class MantenimientoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = $this->validate($request,[
-        'estatus' => 'required|string|max:10|unique:mantenimientos'
-       ]);
        try{
         $mantenimiento = Mantenimiento::findOrFail($id);
         $mantenimiento->fill($request->all())->save();
-        #$tiposhardware->nomHardware = $request->tiposHardware();
-        $bien->noserie = $request->Bien();    
+        #$tiposhardware->nomHardware = $request->tiposHardware();  
        # $ubicacion->aula = $request->Ubicacion();
        # 
        # $responsable->nombre = $request->Responsable();
