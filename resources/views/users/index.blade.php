@@ -92,8 +92,6 @@ $(document).ready( function () {
     columns: [
       { data: 'name'},
       { data: 'email'},
-      { data: 'email_verified_at'},
-      { data: 'password'},
       { data: 'rol'},
       { data: 'actions', className: "center", defaultContent: '<button class="edit btn btn-light disabled"> NO </button>' }
     ],

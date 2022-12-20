@@ -123,10 +123,5 @@ $(document).ready( function () {
     }
   });
 });
-function Estatus(){
-    if(document.getElementById('estatus').value=="1"){
-        document.getElementById('estado').innerHTML="Disponible";
-    }
-}
 </script>
 @endsection
