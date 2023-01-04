@@ -4,14 +4,16 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h1>Bienvenido</h1>
+            <h1>Proximos mantenimientos</h1>
         </div>
         <div class="card-body">
             {{-- <h5 class="card-title">Tabla con datatables</h5> --}}
             <table id="table" name="table" class="table table-hover display responsive no-wrap " width="100%">
               <thead class="thead text-white">
                 <tr>
-                  <th scope="col">nomHardware</th>
+                  <th scope="col">lugar</th>
+                  <th scope="col">fecha</th>
+                  <th scope="col">encargado</th>
                 </tr>
               </thead>
             </table>
@@ -28,9 +30,11 @@ $(document).ready( function () {
     fixedHeader: true,
     processing: true,
     serverSide: true,
-    ajax: "{{ url('tiposhardware/getdata') }}",
+    ajax: "{{ url('salones/getdata') }}",
     columns: [
-      { data: 'nomHardware' },
+      { data: 'lugar' },
+      { data: 'fecha' },
+      { data: 'encargado' },
     ],
     language: {
       "url": "{{asset('dataTables/spanish.json')}}"
