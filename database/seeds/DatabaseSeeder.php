@@ -24,10 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->command->info('tipoAdquisicionSeeder have been created!');
         $this->call('UserSeeder');
         $this->command->info('UserSeeder have been created!');
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a09a4fdf85f6ccff236099849433c8653e1af11
 
     }
 }
