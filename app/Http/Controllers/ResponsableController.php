@@ -78,7 +78,9 @@ class ResponsableController extends Controller
     public function store(Request $request)
     {
        $validator = $this->validate($request,[
-        'matricula' => 'required|string|max:10|unique:responsables'
+        'matricula' => 'required|string|max:10|alpha_num|unique:responsables',
+        'nombre' => 'required|string|alpha_num',
+        'rol' => 'required|string|alpha_num'
        ]);
         try {
             $responsable = new Responsable;

@@ -60,7 +60,7 @@
 							<a href="#" class="nav-link">
 								<i class="fa-solid fas fa-wrench"></i>
 								<p>
-									Reparacion de equipos
+									Reparación de equipos
 									<i class="right fa fa-angle-left "></i>
 								</p>
 							</a>
@@ -72,7 +72,7 @@
 								</li>
                                 <li class="nav-item submenuitem">
 									<a href="{{ url('salones/') }}" class="nav-link"><i class="fa-solid fas fa-folder-plus"></i>
-										<p class="submenuitem">Registar Aulas</p>
+										<p class="submenuitem">Registrar Aulas</p>
 									</a>
 								</li>
 							</ul>

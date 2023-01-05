@@ -8,7 +8,7 @@
     <div class="container">
     <div class="card text-center">
     <div class="card-header"> 
-    <h3 class="float-left">Registrar mantenimiento</h3>
+    <h3 class="float-left">Registrar mantenimiento de equipo</h3>
         <a href="{{url('mantenimiento')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right "><i class="fas fa-chevron-left fa-fw fa-lg"></i> Regresar</a>
         </div>  
         {!! Form::model($mantenimiento, ['action' => 'MantenimientoController@store']) !!}

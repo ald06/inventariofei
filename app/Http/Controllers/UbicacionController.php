@@ -78,7 +78,8 @@ class UbicacionController extends Controller
     public function store(Request $request)
     {
         $validator = $this->validate($request,[
-            'aula' => 'required|string|max:10|unique:ubicacions'
+            'aula' => 'required|string|alpha_num|unique:ubicacions',
+            'aula' => 'required|string|alpha_num'
         ]);
         try {
             $ubicacion = new Ubicacion;
@@ -150,6 +151,6 @@ class UbicacionController extends Controller
     {
         $ubicacion = Ubicacion::findOrFail($id);
         $ubicacion->delete();
-        return redirect('ubicacion/')->with('message', 'Hardware Eliminado Correctamente');
+        return redirect('ubicacion/')->with('message', 'Ubicación Eliminada Correctamente');
     }
 }

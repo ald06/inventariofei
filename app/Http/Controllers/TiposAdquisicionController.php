@@ -77,7 +77,7 @@ class TiposAdquisicionController extends Controller
     public function store(Request $request)
     {
         $validator = $this->validate($request,[
-            'nombre' => 'required|string|max:25|unique:tipos_adquisicions'
+            'nombre' => 'required|string|max:25|alpha_num|unique:tipos_adquisicions'
         ]);
         try {
             $tiposAdquisicion = new TiposAdquisicion;
