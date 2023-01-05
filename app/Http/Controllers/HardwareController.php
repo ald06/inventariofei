@@ -9,8 +9,11 @@ use App\Ubicacion;
 use App\tiposadquisicion;
 use App\tiposhardware;
 
+
 use Illuminate\Http\Request;
 use Redirect,Response,DB,Config;
+use Codedge\Fpdf\Fpdf\Fpdf;
+use Carbon\Carbon;
 use Datatables;
 
 class HardwareController extends Controller
@@ -44,7 +47,7 @@ class HardwareController extends Controller
                 <a href="'.route('hardware.show', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-info-circle"></i> Detalle </a>
              <div class="dropdown-divider my-1"></div>
                 <a href="'.route('hardware.edit', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar </a>
-             <div class="dropdown-divider my-1"></div> 
+             <div class="dropdown-divider my-1"></div>
                 <a href="'.route('hardware.trans', $hardware->id).'" role="button" class="dropdown-item"><i class="fa-solid fas fa-person-chalkboard"></i> Transferencia </a>
              <div class="dropdown-divider my-1"></div>
               <form action="'.route('hardware.destroy', $hardware->id).'" method="POST">
@@ -63,7 +66,7 @@ class HardwareController extends Controller
         <p>Solo el administrador puede realizar acciones</p>
           <div class="dropdown-divider my-1"></div>';
       };
-       return $menuadmin;     
+       return $menuadmin;
      })
 
 
@@ -214,29 +217,29 @@ class HardwareController extends Controller
 
 
     return redirect('hardware')->with('message', 'Actualizacion Exitosa');
-  
+
     }
-  
+
     public function transfer(Request $request,$id)
     {
-     
+
       try {
         $hardware = Hardware::findOrFail($id);
         $bien =  Bien::findOrFail($hardware->bien_id);
 
-        
+
         $bien->responsable_id = $request->responsable;
         $bien->ubicacion_id = $request->ubicacion;
         $bien->save();
-      
+
       } catch (\Exception $e) {
           $errors = $e;
       return redirect()->back()->with('errors', $errors);
-   
+
       }
 
     return redirect('hardware')->with('message', 'Transeferencia Exitosa');
-    
+
     }
 
     /**
@@ -255,4 +258,55 @@ class HardwareController extends Controller
       $bien->delete();
       return redirect('hardware/')->with('message', 'Hardware Eliminado Correctamente');
     }
+
+    public function reportehw(){
+
+
+        $hardwares = Hardware::with('bien')->get();
+
+         // return $hardwares;
+
+        $fpdf= new Fpdf('L','mm','A4');
+
+        $fpdf->AddPage();
+        $fpdf->Image('img/uv.jpg', 25, 5.5, 25,25);
+        $fpdf->Image('img/fei.png', 250, 7.5, 20,20);
+        $fpdf->SetFont('Courier', '', 18);
+        $fpdf->Cell(280, 6, 'Universidad Veracruza','',1,'C');
+        $fpdf->Cell(280, 6, utf8_decode('Facultad de Estadística e Informática'),'',1,'C');
+        $fpdf->Cell(280, 6, 'Equipo de Computo','',1,'C');
+        $fpdf->Ln(10);
+        $fpdf->SetFont('Courier', '', 11);
+        $fpdf->Ln(3);
+
+        //encabezado
+        $fpdf->Cell(30, 5, 'No.Serie',1,0,'C');
+        $fpdf->Cell(35, 5, 'No.Inventario',1,0,'C');
+        $fpdf->Cell(20, 5, 'Marca',1,0,'C');
+        $fpdf->Cell(30, 5, 'Modelo',1,0,'C');
+        $fpdf->Cell(60, 5, 'Ubicacion',1,0,'C');
+        $fpdf->Cell(30, 5, 'Adquisicion',1,0,'C');
+        $fpdf->Cell(52, 5, 'Fecha de alta',1,1,'C');
+
+        //cuerpo del pdf -- datos
+        $alt = 7;
+
+        foreach ($hardwares as $hardware ) {
+          $bien = Bien::whereId($hardware->bien_id)->with('responsable','ubicacion','adquisicion')->get();
+          $fpdf->Cell(30, $alt, $hardware->bien->noserie,1,0,'C');
+          $fpdf->Cell(35, $alt, $hardware->bien->noinventario,1,0,'C');
+          $fpdf->Cell(20, $alt, $hardware->marca,1,0,'C');
+          $fpdf->Cell(30, $alt, $hardware->modelo,1,0,'C');
+          $fpdf->Cell(60, $alt, $bien[0]->ubicacion->edificio."-".$bien[0]->ubicacion->aula,1,0,'C');
+          $fpdf->Cell(30, $alt, $bien[0]->adquisicion->nombre,1,0,'C');
+          $fpdf->Cell(52, $alt, $hardware->created_at,1,1,'C');
+        }
+
+        $fpdf->Output();
+        exit;
+
+
+    }
+
+
 }

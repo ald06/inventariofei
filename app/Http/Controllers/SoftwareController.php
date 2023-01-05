@@ -188,4 +188,6 @@ class SoftwareController extends Controller
       $bien->delete();
       return redirect('software/')->with('message', 'Software Eliminado Correctamente');
     }
+
+    
 }

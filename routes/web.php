@@ -60,4 +60,4 @@ Route::resource('/tiposadquisicion', 'TiposAdquisicionController');
 Route::get('/users/getdata', 'UsersController@getData')->name('register.getData');
 Route::resource('/users', 'UsersController');
 
-
+Route::get('/reporte', 'HardwareController@reporte')->name('hardware.reporte');

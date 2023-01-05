@@ -29,5 +29,13 @@ public function adquisicion() {
          return $this->hasOne('App\tiposAdquisicion','id','tipoadquisicion_id');
      }
 
+public function responsable() {
+        return $this->hasOne('App\responsable','id','responsable_id');
+    }
+
+public function ubicacion() {
+        return $this->hasOne('App\ubicacion','id','ubicacion_id');
+    }
+
 
 }
