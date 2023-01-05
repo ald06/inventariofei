@@ -3,16 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Software extends Model
 {
+  use SoftDeletes;
+
 protected $primaryKey = 'id';
 protected $fillable = [
-  'marca',
-  'modelo',
-  'tipo',
-  'caracteristicas',
-  'observaciones',
+  'nombre',
+  'version',
+  'descripcion',
+  'tipoSoftware',
+  'licencia',
+  'disponibilidad',
+  'equiposPermitidos',
+  'equiposOcupados',
   'bien_id',
 ];
 protected $dates = ['deleted_at'];

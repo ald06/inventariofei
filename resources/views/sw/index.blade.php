@@ -18,9 +18,10 @@
         <table id="table" name="table" class="table table-hover display responsive no-wrap " width="100%">
           <thead class="thead text-white">
             <tr>
-              <th scope="col">noserie</th>
               <th scope="col">noinventario</th>
               <th scope="col">nombre</th>
+              <th scope="col">version</th>
+              <th scope="col">Equipos Max.</th>
               <th scope="col" data-priority="1" class="title text-white">Acciones</th>
             </tr>
           </thead>
@@ -46,7 +47,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-excel fa-3x" data-toggle="tooltip" data-placement="top" title="Excel"></i>',
           extend: 'excelHtml5',
           fieldSeparator: '\t',
-          title : 'Materias',
+          title : 'Software',
             exportOptions: {
               columns: [ 0, ':visible' ]
             }
@@ -55,7 +56,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-csv fa-3x" data-toggle="tooltip" data-placement="top" title="CSV"></i>',
           extend: 'csvHtml5',
           fieldSeparator: '\t',
-          title : 'Materias',
+          title : 'Software',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -64,7 +65,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-pdf fa-3x" data-toggle="tooltip" data-placement="top" title="PDF"></i>',
           extend: 'pdfHtml5',
           fieldSeparator: '\t',
-          title : 'Materias',
+          title : 'Software',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -73,7 +74,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-print fa-3x" data-toggle="tooltip" data-placement="top" title="Imprimir"></i>',
           extend: 'print',
           fieldSeparator: '\t',
-          title : 'Materias',
+          title : 'Software',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -87,9 +88,10 @@ $(document).ready( function () {
     ],
     ajax: "{{ url('software/getdata') }}",
     columns: [
-      { data: 'bien.noserie' },
       { data: 'bien.noinventario' },
       { data: 'nombre' },
+      { data: 'version' },
+      { data: 'equiposPermitidos' },
       { data: 'actions', className: "center", defaultContent: '<button class="edit btn btn-light disabled"> NO </button>' }
     ],
     language: {

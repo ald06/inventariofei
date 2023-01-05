@@ -22,11 +22,12 @@
             <input type="text" id="noinventario" name="noinventario" value="{{ old('noinventario') }}" class="form-control text-center text-uppercase" placeholder="" required>
           </div>
           <div class="form-group col-md-4">
-            <label for="estatus">Estatus</label>
-            <select class="form-control" name="estatus" id="estatus" required>
-              <option value="" @if(old('estatus') == "") selected @endif>Elija un opcion</option>
-              <option value="1" @if(old('estatus') == "Tarjeta") selected @endif>Disponible</option>
-              <option value="2" @if(old('estatus') == "Tarjeta") selected @endif>ocupado </option>
+            <label for="tipoSoftware">Tipo</label>
+            <select class="form-control" name="tipoSoftware" id="tipoSoftware" required>
+              <option value="" @if(old('tipoSoftware') == "") selected @endif>Elija una opcion</option>
+              <option value="estadistico" @if(old('tipoSoftware') == "estadistico") selected @endif>Estadistico</option>
+              <option value="programacion" @if(old('tipoSoftware') == "programacion") selected @endif>Programacion </option>
+                <option value="general" @if(old('tipoSoftware') == "general") selected @endif>General </option>
             </select>
          </div>
         </div>
@@ -41,24 +42,20 @@
             <input type="text" id="version" name="version" value="{{ old('version') }}" class="form-control text-center text-uppercase" placeholder="" required>
           </div>
           <div class="form-group col-md-4">
-            <label for="tipo">Tipo</label>
-            <select class="form-control" name="tipo" id="tipo" required>
-              <option value="" @if(old('tipo') == "") selected @endif>Elija una opcion</option>
-              <option value="Laptop" @if(old('tipo') == "Laptop") selected @endif>Laptop</option>
-              <option value="Escritorio" @if(old('tipo') == "Escritorio") selected @endif>Escritorio </option>
-                <option value="Servidor" @if(old('tipo') == "Servidor") selected @endif>Servidor </option>
-            </select>
-         </div>
+            <label for="equiposPermitidos">Equipos Permitidos</label>
+            <input type="text" id="equiposPermitidos" name="equiposPermitidos" value="{{ old('equiposPermitidos') }}" class="form-control text-center text-uppercase" placeholder="" required>
+          </div>
         </div>
         <div class="form-row">
            <div class="form-group col-md-4">
              <label for="licencia">Licencia</label>
              <input type="text" id="licencia" name="licencia" value="{{ old('licencia') }}" class="form-control text-center text-uppercase" placeholder="" required>
            </div>
-          <div class="form-group col-md-4">
-            <label for="equiposPermitidos">Equipos Permitidos</label>
-            <input type="text" id="equiposPermitidos" name="equiposPermitidos" value="{{ old('equiposPermitidos') }}" class="form-control text-center text-uppercase" placeholder="" required>
-          </div>
+           <div class="form-group col-md-8">
+             <label for="descripcion">Descripcion</label>
+             <input type="text" id="descripcion" name="descripcion" value="{{ old('descripcion') }}" class="form-control text-center text-uppercase" placeholder="" required>
+           </div>
+
         </div>
         <div class="row justify-content-center mt-4">
           <button type="submit" class="btn btn-danger btn-block col-md-3"><i class="fas fa-save fa-fw fa-lg"></i> Guardar</button>

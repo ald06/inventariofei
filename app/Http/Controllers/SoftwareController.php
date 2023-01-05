@@ -29,13 +29,22 @@ class SoftwareController extends Controller
      $softwares = Software::with('bien')->get();
      return datatables()->of($softwares)->addColumn('actions', function($software) {
        return '
-         <div class="btn-group dropleft" data-toggle="tooltip" data-placement="top" title="Acciones">
-             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <i class="fas fa-bars fa-lg"></i>
-             </button>
-             <div class="dropdown-menu">
-               <a href="'.route('software.edit', $software->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
-             <div class="dropdown-divider my-1"></div>';
+       <div class="btn-group dropup" data-toggle="tooltip" data-placement="top" title="Acciones">
+           <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <i class="fas fa-bars fa-lg"></i>
+           </button>
+           <div class="dropdown-menu">
+              <a href="'.route('software.show', $software->id).'" role="button" class="dropdown-item"><i class="fas fa-info-circle"></i> Detalle </a>
+           <div class="dropdown-divider my-1"></div>
+              <a href="'.route('software.edit', $software->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar </a>
+           <div class="dropdown-divider my-1"></div>
+            <form action="'.route('software.destroy', $software->id).'" method="POST">
+                <input name="_token" type="hidden" value="'.csrf_token().'">
+                <input name="_method" type="hidden" value="DELETE">
+                <button type="submit" class="dropdown-item "><i class="fas fa-times-circle fa-fw fa-lg text-danger"></i> Baja </button>
+            </form>
+      </div>'
+           ;
      })
    ->rawColumns(['actions'])
    ->make(true);
@@ -65,7 +74,7 @@ class SoftwareController extends Controller
      */
     public function store(Request $request)
     {
-      dd($request);
+      // dd($request);
       $validator = $this->validate($request,[
         'noserie' => 'required|string|max:9|unique:biens',
         'noinventario' => 'required|string|max:9|unique:biens'
@@ -74,11 +83,12 @@ class SoftwareController extends Controller
         $ubicacion   = Ubicacion::where('aula','=','centro de computo')->firstOrFail();;
         $responsable = Responsable::where('rol', '=', 'jefe de centro de computo')->firstOrFail();
         $bien =  new Bien;
-        $bien->noserie        = $request->noserie;
-        $bien->noinventario   = $request->noinventario;
+        $bien->noserie = $request->noserie;
+        $bien->noinventario = $request->noinventario;
         $bien->responsable_id = $responsable->id;
-        $bien->ubicacion_id   = $ubicacion->id;
-        $bien->estatus_id     = $request->estatus;
+        $bien->ubicacion_id = $ubicacion->id;
+        $bien->estatus_id = 1;
+        $bien->tipoadquisicion_id =2;
         $bien->save();
         $ultimobien = Bien::latest('id')->first();
         $software = new Software;
@@ -87,7 +97,7 @@ class SoftwareController extends Controller
         $software->descripcion       = $request->descripcion;
         $software->tipoSoftware      = $request->tipoSoftware;
         $software->licencia          = $request->licencia;
-        $software->disponibilidad    = $request->disponibilidad;
+        $software->disponibilidad    = 'T';
         $software->equiposPermitidos = $request->equiposPermitidos;
         $software->equiposOcupados   = 0;
         $software->bien_id           = $ultimobien->id;
@@ -96,7 +106,7 @@ class SoftwareController extends Controller
           $errors = $e;
           return redirect()->back()->with('errors', $errors);
      }
-    return redirect('hardware')->with('message', 'Registro Exitoso');
+    return redirect('software')->with('message', 'Registro Exitoso');
     }
 
     /**
@@ -116,9 +126,12 @@ class SoftwareController extends Controller
      * @param  \App\Software  $software
      * @return \Illuminate\Http\Response
      */
-    public function edit(Software $software)
+    public function edit($id)
     {
-        //
+
+      $software = Software::findOrFail($id);
+      $bien = Bien::findOrFail($software->bien_id);
+      return view('sw.edit', compact('software','bien'));
     }
 
     /**
@@ -128,9 +141,35 @@ class SoftwareController extends Controller
      * @param  \App\Software  $software
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Software $software)
+    public function update(Request $request, $id)
     {
-        //
+      $validator = $this->validate($request,[
+      'noserie' => 'required|string|max:9|',
+      'noinventario' => 'required|string|max:9|'
+      ]);
+      try {
+      $software = Software::findOrFail($id);
+      $bien =  Bien::findOrFail($software->bien_id);
+
+      $bien->noserie = $request->noserie;
+      $bien->noinventario = $request->noinventario;
+      $bien->save();
+
+      $software->nombre            = $request->nombre;
+      $software->version           = $request->version;
+      $software->descripcion       = $request->descripcion;
+      $software->tipoSoftware      = $request->tipoSoftware;
+      $software->licencia          = $request->licencia;
+      $software->equiposPermitidos = $request->equiposPermitidos;
+      $software->save();
+
+      } catch (\Exception $e) {
+        $errors = $e;
+      return redirect()->back()->with('errors', $errors);
+      }
+
+
+      return redirect('software')->with('message', 'Actualizacion Exitosa');
     }
 
     /**
@@ -139,8 +178,14 @@ class SoftwareController extends Controller
      * @param  \App\Software  $software
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Software $software)
+    public function destroy($id)
     {
-        //
+      $software = Software::findOrFail($id);
+      $bien =  Bien::findOrFail($software->bien_id);;
+      $bien->estatus_id = 4;
+      $bien->save();
+      $software->delete();
+      $bien->delete();
+      return redirect('software/')->with('message', 'Software Eliminado Correctamente');
     }
 }

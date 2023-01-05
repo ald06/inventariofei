@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->command->info('tipoHardwareSeeder have been created!');
         $this->call('tipoAdquisicionSeeder');
         $this->command->info('tipoAdquisicionSeeder have been created!');
+        $this->call('UserSeeder');
+        $this->command->info('UserSeeder have been created!');
 
     }
 }
