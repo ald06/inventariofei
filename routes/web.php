@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 //rutas de bienes
 Route::get('/bien/getdata', 'BienController@getData')->name('bien.getData');
@@ -27,6 +27,12 @@ Route::resource('/bien', 'BienController');
 
 //rutas de bienes
 Route::get('/hardware/getdata', 'HardwareController@getData')->name('hardware.getData');
+Route::resource('/hardware', 'HardwareController');
+
+Route::get('/hardware/{hardware}/trans', 'HardwareController@trans')->name('hardware.trans');
+Route::resource('/hardware', 'HardwareController');
+
+Route::put('hardware/{hardware}/transfer', 'HardwareController@transfer')->name('hardware.transfer');
 Route::resource('/hardware', 'HardwareController');
 
 //rutas de bienes
@@ -41,6 +47,9 @@ Route::resource('/responsable', 'ResponsableController');
 
 Route::get('/salones/getdata', 'SalonesController@getData')->name('salones.getData');
 Route::resource('/salones', 'SalonesController');
+
+Route::get('/mantenimiento/getdata', 'MantenimientoController@getData')->name('mantenimiento.getData');
+Route::resource('/mantenimiento', 'MantenimientoController');
 
 Route::get('/ubicacion/getdata', 'UbicacionController@getData')->name('ubicacion.getData');
 Route::resource('/ubicacion', 'UbicacionController');

@@ -140,12 +140,18 @@ section{
 	<!-- Main Sidebar Container -->
 	@include('layouts.sidebar')
 
+ 
+
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper" style="background-color: rgba(225, 226, 225, 212);">
 	<!-- Content Header (Page header) -->
 
 		<!-- Main content -->
+    
+    
+
 		<section class="content pt-1">
+    
 			<div class="container-fluid p-0">
 		 		@if(Session::has('primer_mensaje'))
          	<script type="text/javascript">
@@ -208,8 +214,11 @@ section{
                 </div>
               </div>
             </div>
-			</div><!--/. container-fluid -->
+			</div>
+      <!--/. container-fluid -->
 		</section>
+
+  
 
 		<!-- /.content -->
 	</div>

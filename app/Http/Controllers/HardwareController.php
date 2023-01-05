@@ -34,7 +34,7 @@ class HardwareController extends Controller
     //  $hardwares = Hardware::all();
      return datatables()->of($hardwares)->addColumn('actions', function($hardware) {
        return '
-         <div class="btn-group dropleft" data-toggle="tooltip" data-placement="top" title="Acciones">
+         <div class="btn-group dropup" data-toggle="tooltip" data-placement="top" title="Acciones">
              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                <i class="fas fa-bars fa-lg"></i>
              </button>
@@ -42,15 +42,15 @@ class HardwareController extends Controller
                 <a href="'.route('hardware.show', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-info-circle"></i> Detalle </a>
              <div class="dropdown-divider my-1"></div>
                 <a href="'.route('hardware.edit', $hardware->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar </a>
+             <div class="dropdown-divider my-1"></div> 
+                <a href="'.route('hardware.trans', $hardware->id).'" role="button" class="dropdown-item"><i class="fa-solid fas fa-person-chalkboard"></i> Transferencia </a>
              <div class="dropdown-divider my-1"></div>
-             <form action="'.route('hardware.destroy', $hardware->id).'" method="POST">
-                 <input name="_token" type="hidden" value="'.csrf_token().'">
-                 <input name="_method" type="hidden" value="DELETE">
-                <button type="submit" class="dropdown-item "><i class="fas fa-times-circle fa-fw fa-lg text-danger"></i> Baja </button>
-            </form>
-              </div>
-            </div>'
-
+              <form action="'.route('hardware.destroy', $hardware->id).'" method="POST">
+                  <input name="_token" type="hidden" value="'.csrf_token().'">
+                  <input name="_method" type="hidden" value="DELETE">
+                  <button type="submit" class="dropdown-item "><i class="fas fa-times-circle fa-fw fa-lg text-danger"></i> Baja </button>
+              </form>
+        </div>'
              ;
      })
 
@@ -87,8 +87,8 @@ class HardwareController extends Controller
     {
       // dd($request);
       $validator = $this->validate($request,[
-        'noserie' => 'required|string|max:9|unique:biens',
-        'noinventario' => 'required|string|max:9|unique:biens'
+        'noserie' => 'required|string|max:9|alpha_num|unique:biens',
+        'noinventario' => 'required|string|max:9|alpha_num|unique:biens'
     ]);
       try {
         $ubicacion   = Ubicacion::where('aula','=','centro de computo')->firstOrFail();;
@@ -156,6 +156,17 @@ class HardwareController extends Controller
       return view('hw.edit', compact('hardware','bien','tiposadquisicion','tiposhardware'));
     }
 
+    public function trans($id)
+    {
+      $tiposadquisicion = tiposAdquisicion::all();
+      $tiposhardware = tiposhardware::all();
+      $responsable = Responsable::all();
+      $ubicacion = Ubicacion::all();
+      $hardware = Hardware::findOrFail($id);
+      $bien = Bien::findOrFail($hardware->bien_id);
+      return view('hw.trans', compact('hardware','bien','responsable','ubicacion','tiposhardware','tiposadquisicion'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -165,7 +176,6 @@ class HardwareController extends Controller
      */
     public function update(Request $request,$id)
     {
-
       $validator = $this->validate($request,[
         'noserie' => 'required|string|max:9|',
         'noinventario' => 'required|string|max:9|'
@@ -188,10 +198,33 @@ class HardwareController extends Controller
       } catch (\Exception $e) {
           $errors = $e;
       return redirect()->back()->with('errors', $errors);
-  }
+      }
 
 
     return redirect('hardware')->with('message', 'Actualizacion Exitosa');
+  
+    }
+  
+    public function transfer(Request $request,$id)
+    {
+     
+      try {
+        $hardware = Hardware::findOrFail($id);
+        $bien =  Bien::findOrFail($hardware->bien_id);
+
+        
+        $bien->responsable_id = $request->responsable;
+        $bien->ubicacion_id = $request->ubicacion;
+        $bien->save();
+      
+      } catch (\Exception $e) {
+          $errors = $e;
+      return redirect()->back()->with('errors', $errors);
+   
+      }
+
+    return redirect('hardware')->with('message', 'Transeferencia Exitosa');
+    
     }
 
     /**

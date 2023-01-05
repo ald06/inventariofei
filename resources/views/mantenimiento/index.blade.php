@@ -8,21 +8,20 @@
   <div class="container-fluid">
     <div class="card text-center">
       <div class="card-header">
-        <h3 class="float-left">Aulas</h3>
+        <h3 class="float-left">Mantenimiento</h3>
         @if(Auth::user()->rol == "admin")
-        <a href="{{url('salones/create')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right">
+        <a href="{{url('mantenimiento/create')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right">
           <i class="fas fa-plus"></i>
         </a>
-            @endif
+        @endif
       </div>
       <div class="card-body">
         {{-- <h5 class="card-title">Tabla con datatables</h5> --}}
         <table id="table" name="table" class="table table-hover display responsive no-wrap " width="100%">
           <thead class="thead text-white">
             <tr>
-              <th scope="col">Lugar</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Encargado</th>
+              <th scope="col">N.serie</th>
+              <th scope="col">Diagnostico</th>      
               <th scope="col" data-priority="1" class="title text-white">Acciones</th>
             </tr>
           </thead>
@@ -33,6 +32,7 @@
 @endsection
 
 @section('scripts')
+
 <script src="{{ asset ('datatables/dataTables.min.js')}}"></script>
 <script>
 $(document).ready( function () {
@@ -47,7 +47,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-excel fa-3x" data-toggle="tooltip" data-placement="top" title="Excel"></i>',
           extend: 'excelHtml5',
           fieldSeparator: '\t',
-          title : 'Salones',
+          title : 'Mantenimiento',
             exportOptions: {
               columns: [ 0, ':visible' ]
             }
@@ -56,7 +56,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-csv fa-3x" data-toggle="tooltip" data-placement="top" title="CSV"></i>',
           extend: 'csvHtml5',
           fieldSeparator: '\t',
-          title : 'Salones',
+          title : 'Mantenimiento',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -65,7 +65,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-file-pdf fa-3x" data-toggle="tooltip" data-placement="top" title="PDF"></i>',
           extend: 'pdfHtml5',
           fieldSeparator: '\t',
-          title : 'Salones',
+          title : 'Mantenimiento',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -74,7 +74,7 @@ $(document).ready( function () {
           text: '<i class="fas fa-print fa-3x" data-toggle="tooltip" data-placement="top" title="Imprimir"></i>',
           extend: 'print',
           fieldSeparator: '\t',
-          title : 'Salones',
+          title : 'Mantenimiento',
           exportOptions: {
             columns: [ 0, ':visible' ]
           }
@@ -86,11 +86,10 @@ $(document).ready( function () {
         //   title : 'Columnas',
         // },
     ],
-    ajax: "{{ url('salones/getdata') }}",
+    ajax: "{{ url('mantenimiento/getdata') }}",
     columns: [
-      { data: 'lugar' },
-      { data: 'fecha' },
-      { data: 'encargado' },
+      { data: 'nserie' },
+      { data: 'diagnostico' },
       { data: 'actions', className: "center", defaultContent: '<button class="edit btn btn-light disabled"> NO </button>' }
     ],
     language: {

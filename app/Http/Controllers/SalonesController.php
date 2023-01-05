@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Salones;
 use Illuminate\Http\Request;
+use App\tiposhardware;
+use App\Responsable;
+use App\Ubicacion;
+use App\Hardware;
+use App\Bien;
 
 class SalonesController extends Controller
 {
@@ -27,6 +32,8 @@ class SalonesController extends Controller
               <i class="fas fa-bars fa-lg"></i>
             </button>
             <div class="dropdown-menu">
+            <a href="'.route('salones.show', $salones->id).'" role="button" class="dropdown-item"><i class="fas fa-info-circle"></i> Detalle </a>
+             <div class="dropdown-divider my-1"></div>
               <a href="'.route('salones.edit', $salones->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
               <form action="'.route('salones.destroy', $salones->id).'" method="POST">
                  <input name="_token" type="hidden" value="'.csrf_token().'">
@@ -53,8 +60,10 @@ class SalonesController extends Controller
     }
     public function create()
     {
+        $responsable = responsable::all();
+        $ubicacion = ubicacion::all();
         $salones = new Salones;
-        return view ('salones.create', compact ('salones'));
+        return view ('salones.create', compact ('salones','responsable','ubicacion'));
     }
 
     /**
@@ -66,15 +75,15 @@ class SalonesController extends Controller
     public function store(Request $request)
     {
        $validator = $this->validate($request,[
-        'dispositivo' => 'required|string|max:10|unique:salones'
+        'lugar' => 'required|string|max:20|unique:salones'
        ]);
         try {
             $salones = new Salones;
-            $salones->dispositivo = $request->dispositivo;
-            $salones->status = $request->status;
             $salones->lugar = $request->lugar;
             $salones->fecha = $request->fecha;
-            $salones->responsable = $request->responsable;            
+            $salones->encargado = $request->encargado;
+            $salones->observaciones = $request->observaciones;
+            
             $salones->save();
         }catch(\Exception $e){
             $errors = $e;
@@ -87,12 +96,14 @@ class SalonesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Salones $salones
+     * @param  \App\Salones  $salones
      * @return \Illuminate\Http\Response
      */
-    public function show(Salones $salones)
+    public function show($id)
     {
-        //
+         $salones = Salones::findOrFail($id);
+
+                return view('salones.show', compact('salones'));
     }
 
     /**
@@ -103,21 +114,23 @@ class SalonesController extends Controller
      */
     public function edit($id)
     {
+        $responsable = responsable::all();
+        $ubicacion = ubicacion::all();
         $salones = Salones::findOrFail($id);
-      return view('salones.edit', compact('salones'));
+      return view('salones.edit', compact('salones','ubicacion','responsable'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Salones  $Salones
+     * @param  \App\Salones  $salones
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
       $validator = $this->validate($request,[
-        'dispositivo' => 'required|string|max:10|unique:salones'
+        'lugar' => 'required|string|max:10|unique:salones'
        ]);
        try{
         $salones = Salones::findOrFail($id);
@@ -133,7 +146,7 @@ class SalonesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Salones  $salones
+     * @param  \App\salones  $salones
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)

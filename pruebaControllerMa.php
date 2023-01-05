@@ -26,8 +26,6 @@ class MantenimientoController extends Controller
               <i class="fas fa-bars fa-lg"></i>
             </button>
             <div class="dropdown-menu">
-                 <a href="'.route('mantenimiento.show', $mantenimiento->id).'" role="button" class="dropdown-item"><i class="fas fa-info-circle"></i> Detalle </a>
-             <div class="dropdown-divider my-1"></div>
               <a href="'.route('mantenimiento.edit', $mantenimiento->id).'" role="button" class="dropdown-item"><i class="fas fa-pencil-alt fa-fw fa-lg text-primary"></i> Editar</a>
               <form action="'.route('mantenimiento.destroy', $mantenimiento->id).'" method="POST">
                  <input name="_token" type="hidden" value="'.csrf_token().'">
@@ -79,7 +77,9 @@ class MantenimientoController extends Controller
         try {
             $mantenimiento = new Mantenimiento;
             $mantenimiento->nserie = $request->nserie;
+            $mantenimiento->dispositivo = $request->dispositivo;
             $mantenimiento->diagnostico = $request->diagnostico;
+            $mantenimiento->estatus = $request->estatus;
             $mantenimiento->justificacion = $request->justificacion;
             $mantenimiento->observaciones = $request->observaciones;
             $mantenimiento->fecha = $request->fecha;
@@ -98,15 +98,15 @@ class MantenimientoController extends Controller
      * @param  \App\Mantenimiento  $mantenimiento
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Mantenimiento $mantenimiento)
     {
              $mantenimiento = Mantenimiento::findOrFail($id);
             # $ubicacion = Ubicacion::findOrFail($bien->ubicacion_id);
            #  
            #  $responsable = Responsable::findOrFail($bien->responsable_id);
-                #$tiposhardware = TiposHardware::findOrFail($bien->tipohardware_id);
-                #$bien = bien::findOrFail($bien->bien);
-                return view('mantenimiento.show', compact('mantenimiento'));#,'tiposhardware','bien'));#,'ubicacion','responsable'));
+                $tiposhardware = TiposHardware::findOrFail($bien->tipohardware_id);
+                $bien = bien::findOrFail($bien->bien);
+                return view('mantenimiento.show', compact('mantenimiento','tiposhardware','bien'));#,'ubicacion','responsable'));
     }
 
     /**
@@ -115,16 +115,16 @@ class MantenimientoController extends Controller
      * @param  \App\Mantenimiento  $mantenimiento
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Mantenimiento $mantenimiento)
     {
-      
+      $mantenimiento = Mantenimiento::findOrFail($id);
      # $ubicacion = ubicacion::all();
      # 
      # $responsable = responsable::all();
      #     
-      #$tiposhardware = tiposhardware::all();
-      $mantenimiento = Mantenimiento::findOrFail($id);    
-      return view('mantenimiento.edit', compact('mantenimiento'));#));#,'ubicacion',,'tiposhardware','bien''responsable'));
+      $tiposhardware = tiposhardware::all();
+      $bien = bien::all();
+      return view('mantenimiento.edit', compact('mantenimiento','tiposhardware','bien'));#,'ubicacion','responsable'));
     }
 
     /**
@@ -134,12 +134,16 @@ class MantenimientoController extends Controller
      * @param  \App\Mantenimiento  $mantenimiento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Mantenimiento $mantenimiento)
     {
+        $validator = $this->validate($request,[
+        'nserie' => 'required|string|max:10|unique:mantenimientos'
+       ]);
        try{
         $mantenimiento = Mantenimiento::findOrFail($id);
         $mantenimiento->fill($request->all())->save();
-        #$tiposhardware->nomHardware = $request->tiposHardware();  
+        $tiposhardware->nomHardware = $request->tiposHardware();
+        $bien->noserie = $request->Bien();    
        # $ubicacion->aula = $request->Ubicacion();
        # 
        # $responsable->nombre = $request->Responsable();
@@ -158,11 +162,11 @@ class MantenimientoController extends Controller
      * @param  \App\Mantenimiento  $mantenimiento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Mantenimiento $mantenimiento)
     {
       $mantenimiento = Mantenimiento::findOrFail($id);
       $mantenimiento->delete();
-      return redirect('mantenimiento/')->with('message', 'Eliminado Correctamente');
+      return redirect('mantenimiento/')->with('message', 'salones Eliminado Correctamente');
 
     }
 }

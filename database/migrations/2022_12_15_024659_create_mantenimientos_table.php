@@ -15,10 +15,11 @@ class CreateMantenimientosTable extends Migration
     {
         Schema::create('mantenimientos', function (Blueprint $table) {
             $table->id();
+            $table->string('nserie');
             $table->string('diagnostico');
-            $table->string('estatus');
             $table->string('justificacion');
             $table->string('observaciones');
+            $table->date('fecha');
             $table->timestamps();
         });
     }

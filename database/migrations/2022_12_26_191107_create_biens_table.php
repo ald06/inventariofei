@@ -16,7 +16,7 @@ class CreateBiensTable extends Migration
         Schema::create('biens', function (Blueprint $table) {
             $table->id();
             $table->string('noserie');
-            $table->string('noinventario')->uniquw();
+            $table->string('noinventario')->unique();
             $table->unsignedBigInteger('responsable_id');
             $table->foreign('responsable_id')->references('id')->on('responsables');
             $table->unsignedBigInteger('ubicacion_id');
