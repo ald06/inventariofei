@@ -28,7 +28,9 @@ class SoftwareController extends Controller
     {
      $softwares = Software::with('bien')->get();
      return datatables()->of($softwares)->addColumn('actions', function($software) {
-       return '
+        $rol = auth()->user()->rol;
+        if($rol == 'admin'){
+          $menuadmin ='
        <div class="btn-group dropup" data-toggle="tooltip" data-placement="top" title="Acciones">
            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              <i class="fas fa-bars fa-lg"></i>
@@ -43,8 +45,18 @@ class SoftwareController extends Controller
                 <input name="_method" type="hidden" value="DELETE">
                 <button type="submit" class="dropdown-item "><i class="fas fa-times-circle fa-fw fa-lg text-danger"></i> Baja </button>
             </form>
-      </div>'
-           ;
+      </div>';
+    }else{
+      $menuadmin ='
+      <div class="btn-group dropleft" data-toggle="tooltip" data-placement="top" title="Acciones">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-bars fa-lg"></i>
+      </button>
+      <div class="dropdown-menu">
+      <p>Solo el administrador puede realizar acciones</p>
+        <div class="dropdown-divider my-1"></div>';
+    };
+     return $menuadmin;  
      })
    ->rawColumns(['actions'])
    ->make(true);
@@ -76,8 +88,9 @@ class SoftwareController extends Controller
     {
       // dd($request);
       $validator = $this->validate($request,[
-        'noserie' => 'required|string|max:9|unique:biens',
-        'noinventario' => 'required|string|max:9|unique:biens'
+        'noserie' => 'required|string|max:9|alpha_num|unique:biens',
+        'noinventario' => 'required|string|max:9|alpha_num|unique:biens',
+        'equiposPermitidos'=> 'numeric'
     ]);
       try {
         $ubicacion   = Ubicacion::where('aula','=','centro de computo')->firstOrFail();;
@@ -115,9 +128,12 @@ class SoftwareController extends Controller
      * @param  \App\Software  $software
      * @return \Illuminate\Http\Response
      */
-    public function show(Software $software)
+    public function show($id)
     {
-        //
+        $software = Software::findOrFail($id);
+
+        $bien = Bien::findOrFail($software->bien_id);
+        return view('sw.show', compact('software','bien'));
     }
 
     /**
