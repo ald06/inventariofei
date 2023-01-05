@@ -77,7 +77,7 @@ class TiposHardwareController extends Controller
     public function store(Request $request)
     {
         $validator = $this->validate($request,[
-            'nomHardware' => 'required|string|max:50|unique:tipos_hardware'
+            'nomHardware' => 'required|string|max:50|alpha_num|unique:tipos_hardware'
         ]);
         try {
             $tiposHardware = new TiposHardware;

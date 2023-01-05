@@ -8,7 +8,7 @@
   <div class="container-fluid">
     <div class="card text-center">
       <div class="card-header">
-        <h3 class="float-left">Mantenimiento</h3>
+        <h3 class="float-left">Mantenimiento de Equipos</h3>
         @if(Auth::user()->rol == "admin")
         <a href="{{url('mantenimiento/create')}}" role="button" name="button" class="btn btn-danger col-md-2 float-right">
           <i class="fas fa-plus"></i>
